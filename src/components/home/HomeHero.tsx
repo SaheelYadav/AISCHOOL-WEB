@@ -141,67 +141,106 @@ export default function HomeHero() {
           </div>
         </div>
 
-        {/* Right Side (55% on desktop - Premium Grounded Center Image) */}
-        <div className="lg:col-span-7 flex justify-center items-center relative min-h-[380px] sm:min-h-[480px] lg:min-h-[520px] w-full">
+        {/* Right Side (55% on desktop - Premium Grounded Center Image + Orbit Framework) */}
+        <div className="lg:col-span-7 flex justify-center items-center relative min-h-[380px] sm:min-h-[480px] lg:min-h-[520px] w-full overflow-visible">
           {mounted && (
-            <div className="relative w-full max-w-[210px] sm:max-w-[270px] lg:max-w-[350px] aspect-[4/3] flex items-center justify-center">
-              
-              {/* Subtle radial light behind the artwork (creates depth without visible edges) */}
-              <div className="absolute inset-0 -m-36 bg-[radial-gradient(circle,rgba(255,255,255,1)_0%,rgba(238,28,37,0.005)_50%,transparent_100%)] rounded-full blur-[80px] pointer-events-none z-0" />
+            <>
+              {/* Static Premium Orbit SVG Layer */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                <svg 
+                  className="w-[580px] h-[580px] min-w-[580px] min-h-[580px] opacity-100" 
+                  viewBox="0 0 600 600"
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  {/* Concentric Orbit Rings (Extremely thin, very light red) */}
+                  {/* Inner Ring (Radius: 90px) */}
+                  <circle cx="300" cy="300" r="90" stroke="#EE1C25" strokeWidth="1.2" strokeOpacity="0.12" />
+                  {/* Medium Ring (Radius: 155px) */}
+                  <circle cx="300" cy="300" r="155" stroke="#EE1C25" strokeWidth="1.2" strokeOpacity="0.12" />
+                  {/* Outer Ring (Radius: 220px) */}
+                  <circle cx="300" cy="300" r="220" stroke="#EE1C25" strokeWidth="1.2" strokeOpacity="0.12" />
 
-              {/* Grounding soft wide elliptical shadow beneath the artwork */}
-              <motion.div
-                animate={shouldReduceMotion ? {} : {
-                  scaleX: [1, 0.97, 1],
-                  opacity: [0.025, 0.015, 0.025]
-                }}
-                transition={{
-                  duration: 12.0,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "easeInOut",
-                }}
-                className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[90%] h-3 bg-black/[0.08] blur-[20px] rounded-full pointer-events-none z-10"
-              />
+                  {/* Elegant Intersecting Bezier Curves (Satellite trajectories) */}
+                  <path d="M110 200 C 200 240, 400 130, 490 270" stroke="#EE1C25" strokeWidth="1.2" strokeOpacity="0.08" />
+                  <path d="M170 470 C 230 360, 430 430, 510 210" stroke="#EE1C25" strokeWidth="1.2" strokeOpacity="0.06" />
 
-              <motion.div
-                style={{
-                  x: coords.x,
-                  y: coords.y,
-                }}
-                animate={{
-                  y: shouldReduceMotion ? 0 : [0, -2, 0], // Extremely subtle float (2px)
-                }}
-                transition={{
-                  x: { type: "spring", stiffness: 100, damping: 20 },
-                  y: {
-                    duration: 12.0, // Slow 12s duration loop for maximum elegance
+                  {/* Orbit Nodes (Different sizes, filled vs outlined, 70-90% opacity) */}
+                  {/* Inner Ring Nodes (R = 90) */}
+                  <circle cx="363.6" cy="363.6" r="3" stroke="#EE1C25" strokeWidth="1.5" strokeOpacity="0.8" fill="none" />
+                  <circle cx="231.3" cy="242.1" r="2" fill="#EE1C25" fillOpacity="0.85" />
+
+                  {/* Medium Ring Nodes (R = 155) */}
+                  <circle cx="190.4" cy="409.6" r="4" fill="#EE1C25" fillOpacity="0.8" />
+                  <circle cx="434.2" cy="222.5" r="3" stroke="#EE1C25" strokeWidth="1.5" strokeOpacity="0.75" fill="none" />
+                  <circle cx="353.0" cy="154.3" r="2" fill="#EE1C25" fillOpacity="0.85" />
+
+                  {/* Outer Ring Nodes (R = 220) */}
+                  <circle cx="512.5" cy="357.0" r="4" stroke="#EE1C25" strokeWidth="1.5" strokeOpacity="0.8" fill="none" />
+                  <circle cx="83.3" cy="261.8" r="3" fill="#EE1C25" fillOpacity="0.8" />
+                </svg>
+              </div>
+
+              {/* Central Logo composition */}
+              <div className="relative w-full max-w-[170px] sm:max-w-[215px] lg:max-w-[280px] aspect-[4/3] flex items-center justify-center z-20">
+                
+                {/* Subtle premium light field behind the logo (soft radial white glow, light red tint, large blurred circle) */}
+                <div className="absolute w-[200%] h-[200%] bg-[radial-gradient(circle,rgba(255,255,255,1)_0%,rgba(238,28,37,0.012)_35%,rgba(238,28,37,0.003)_65%,transparent_100%)] rounded-full blur-[60px] pointer-events-none z-0" />
+
+                {/* Grounding soft wide elliptical shadow beneath the logo */}
+                <motion.div
+                  animate={shouldReduceMotion ? {} : {
+                    scaleX: [1, 0.96, 1],
+                    opacity: [0.02, 0.012, 0.02]
+                  }}
+                  transition={{
+                    duration: 12.0,
                     repeat: Infinity,
                     repeatType: "reverse",
                     ease: "easeInOut",
-                  }
-                }}
-                className="relative w-full h-full flex justify-center items-center z-20 group cursor-pointer"
-              >
-                {/* Centered Image Artwork container with minimal, ultra-soft shadow and radial feathering mask */}
-                <div 
-                  className="relative w-full h-full filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.01)] mix-blend-multiply"
-                  style={{
-                    maskImage: "radial-gradient(circle, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%)",
-                    WebkitMaskImage: "radial-gradient(circle, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%)",
                   }}
+                  className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[110%] h-3.5 bg-black/[0.06] blur-[22px] rounded-full pointer-events-none z-10"
+                />
+
+                <motion.div
+                  style={{
+                    x: coords.x,
+                    y: coords.y,
+                  }}
+                  animate={{
+                    y: shouldReduceMotion ? 0 : [0, -1.5, 0], // Ultra-subtle float (1.5px)
+                  }}
+                  transition={{
+                    x: { type: "spring", stiffness: 100, damping: 20 },
+                    y: {
+                      duration: 12.0, // Slow 12s duration loop for maximum elegance
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                      ease: "easeInOut",
+                    }
+                  }}
+                  className="relative w-full h-full flex justify-center items-center z-20 group cursor-pointer"
                 >
-                  <Image
-                    src="/assets/image copy.png"
-                    alt="Premium AI Ecosystem Illustration"
-                    fill
-                    priority
-                    sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 350px"
-                    className="object-contain pointer-events-none select-none transition-transform duration-700 ease-out group-hover:scale-[1.01]"
-                  />
-                </div>
-              </motion.div>
-            </div>
+                  {/* Centered Image Artwork container with minimal, ultra-soft shadow and gradual feathering mask */}
+                  <div 
+                    className="relative w-full h-full filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.005)] mix-blend-multiply"
+                    style={{
+                      maskImage: "radial-gradient(circle, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 95%)",
+                      WebkitMaskImage: "radial-gradient(circle, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 95%)",
+                    }}
+                  >
+                    <Image
+                      src="/assets/image copy.png"
+                      alt="Premium AI Ecosystem Illustration"
+                      fill
+                      priority
+                      sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 280px"
+                      className="object-contain pointer-events-none select-none transition-transform duration-700 ease-out group-hover:scale-[1.01]"
+                    />
+                  </div>
+                </motion.div>
+              </div>
+            </>
           )}
         </div>
       </div>

@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  type Transition,
+  useReducedMotion,
+} from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, Users } from "lucide-react";
 
@@ -11,27 +15,41 @@ export default function AboutHero() {
   const [coords, setCoords] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    setMounted(true);
+    const frame = requestAnimationFrame(() => {
+      setMounted(true);
+    });
+
+    return () => cancelAnimationFrame(frame);
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (
+    e: React.MouseEvent<HTMLDivElement>
+  ) => {
     if (shouldReduceMotion) return;
+
     const { clientX, clientY, currentTarget } = e;
-    const { width, height, left, top } = currentTarget.getBoundingClientRect();
-    
-    // Calculate normalized position from center (-1 to 1)
-    const x = (clientX - left - width / 2) / (width / 2);
-    const y = (clientY - top - height / 2) / (height / 2);
-    
-    // Cap movement between -10px and 10px
-    setCoords({ x: x * 10, y: y * 10 });
+    const { width, height, left, top } =
+      currentTarget.getBoundingClientRect();
+
+    const x =
+      (clientX - left - width / 2) / (width / 2);
+
+    const y =
+      (clientY - top - height / 2) / (height / 2);
+
+    setCoords({
+      x: x * 10,
+      y: y * 10,
+    });
   };
 
   const handleMouseLeave = () => {
-    setCoords({ x: 0, y: 0 });
+    setCoords({
+      x: 0,
+      y: 0,
+    });
   };
 
-  // Stagger variants for the text elements
   const containerVariants = {
     hidden: {},
     visible: {
@@ -42,16 +60,26 @@ export default function AboutHero() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    hidden: {
+      opacity: 0,
+      y: shouldReduceMotion ? 0 : 20,
+    },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+      transition: {
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1] as [
+          number,
+          number,
+          number,
+          number
+        ],
+      },
     },
   };
 
-  // Continuous floating animation variants
-  const floatTransition = shouldReduceMotion
+  const floatTransition: Transition = shouldReduceMotion
     ? {}
     : {
         y: {
@@ -66,77 +94,75 @@ export default function AboutHero() {
     <section
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full min-h-screen bg-[#020202] text-white flex items-center justify-center py-24 md:py-32 overflow-hidden select-none border-b border-white/5"
+      className="relative w-full min-h-screen bg-[#FCFCFD] text-slate-900 flex items-center justify-center py-28 md:py-36 lg:py-40 overflow-hidden border-b border-[#ECECEC]"
     >
-      {/* 1. Micro-Noise Overlay Texture */}
-      <div 
+      {/* Noise */}
+      <div
         className="absolute inset-0 pointer-events-none opacity-[0.015] z-10 bg-repeat bg-center"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
         }}
       />
 
-      {/* 2. Ambient Lighting & Floating Blurred Circles */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {/* Soft Red Radial Glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] rounded-full bg-red-900/10 blur-[120px] pointer-events-none" />
-
-        {/* Ambient Blurred Circle 1 */}
-        <motion.div
-          animate={shouldReduceMotion ? {} : { x: [0, 15, 0], y: [0, -25, 0] }}
-          transition={{ duration: 10, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-          className="absolute -top-12 -left-12 w-96 h-96 rounded-full bg-red-950/20 blur-[80px]"
-        />
-
-        {/* Ambient Blurred Circle 2 */}
-        <motion.div
-          animate={shouldReduceMotion ? {} : { x: [0, -20, 0], y: [0, 20, 0] }}
-          transition={{ duration: 12, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-          className="absolute bottom-12 right-12 w-80 h-80 rounded-full bg-indigo-950/10 blur-[90px]"
+      {/* Ambient */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 72% 42%, rgba(238,28,37,0.07), rgba(238,28,37,0.025) 34%, transparent 62%), radial-gradient(ellipse at 24% 18%, rgba(238,28,37,0.045), transparent 44%), linear-gradient(180deg, rgba(255,255,255,0.95), rgba(252,252,253,1))",
+          }}
         />
       </div>
 
-      {/* 3. Subtle Animated CSS Grid */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-[0.03] z-0"
+      {/* Engineering Grid */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.045]"
         style={{
-          backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
+          backgroundImage: `
+            linear-gradient(rgba(238,28,37,.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(238,28,37,.05) 1px, transparent 1px)
+          `,
+          backgroundSize: "64px 64px",
         }}
       />
 
-      {/* Hero Container */}
-      <div className="relative z-20 max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
-        
-        {/* Left Side: Cinematic Copy */}
+      <div className="relative z-20 max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-12 lg:gap-2 xl:gap-4 items-center">
+        {/* Left Side */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="lg:col-span-7 flex flex-col items-start text-left space-y-6 md:space-y-8"
+          className="relative z-30 lg:col-span-6 flex flex-col items-start text-left space-y-6 md:space-y-8"
         >
           {/* Badge */}
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#EE1C25] animate-pulse" />
-            <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.15em] text-neutral-400 font-sans">
-              INDIA'S FIRST AI LEARNING ECOSYSTEM
+            <span className="w-2 h-2 rounded-full bg-[#EE1C25] animate-pulse" />
+
+            <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.18em] text-slate-500">
+              INDIA&apos;S FIRST AI LEARNING ECOSYSTEM
             </span>
           </motion.div>
 
           {/* Heading */}
-          <div className="space-y-3">
+          <div className="space-y-4">
             <motion.h1
               variants={itemVariants}
-              className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] font-heading bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-transparent"
+              className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-tight bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#64748B] bg-clip-text text-transparent"
             >
-              Building India's Next Generation of AI Engineers.
+              Building India&apos;s Next
+              <br />
+              Generation of AI
+              <br />
+              Engineers.
             </motion.h1>
+
             <motion.p
               variants={itemVariants}
-              className="text-[#EE1C25] font-heading font-extrabold text-sm md:text-base tracking-widest uppercase"
+              className="text-[#EE1C25] font-black text-sm md:text-base tracking-[0.25em] uppercase"
             >
               Where Intelligence Meets Innovation.
             </motion.p>
@@ -145,36 +171,42 @@ export default function AboutHero() {
           {/* Description */}
           <motion.p
             variants={itemVariants}
-            className="text-neutral-400 text-base md:text-lg leading-relaxed font-sans font-medium max-w-2xl"
+            className="max-w-2xl text-slate-600 text-base md:text-lg leading-relaxed"
           >
-            At The AI School, we don't just teach Artificial Intelligence. We empower students, professionals and startup founders to build real AI products, solve real-world problems and shape the future of technology.
+            At The AI School, we don&apos;t just teach Artificial
+            Intelligence. We empower students, professionals and
+            startup founders to build real AI products, solve
+            real-world problems and shape the future of
+            technology.
           </motion.p>
 
-          {/* Action Buttons */}
+          {/* CTA Buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+            className="flex flex-col sm:flex-row gap-4"
           >
             <a
               href="#who-we-are"
-              className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#EE1C25] hover:bg-[#D3131B] text-white text-sm font-black uppercase tracking-wider rounded-full transition-all duration-300 shadow-[0_4px_20px_rgba(238,28,37,0.25)] hover:shadow-[0_4px_25px_rgba(238,28,37,0.4)] active:scale-98"
+              className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[#EE1C25] text-white font-black uppercase tracking-wide transition-all duration-300 hover:bg-[#D3131B] hover:shadow-[0_15px_35px_rgba(238,28,37,.35)]"
             >
-              <span>Explore Our Story</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              Explore Our Story
+
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
 
             <a
               href="#leadership"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 text-white text-sm font-black uppercase tracking-wider rounded-full backdrop-blur-md transition-all duration-300 active:scale-98"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-900 font-black uppercase tracking-wide transition-all duration-300"
             >
-              <Users className="w-4 h-4 text-neutral-400" />
-              <span>Meet Our Leadership</span>
+              <Users className="w-4 h-4 text-slate-500" />
+
+              Meet Our Leadership
             </a>
           </motion.div>
         </motion.div>
 
-        {/* Right Side: Interactive Artwork */}
-        <div className="lg:col-span-5 flex justify-center items-center">
+        {/* Right Side */}
+        <div className="relative z-10 lg:col-span-6 flex justify-center lg:justify-end items-center lg:pl-8 xl:pl-12">
           {mounted && (
             <motion.div
               style={{
@@ -182,30 +214,43 @@ export default function AboutHero() {
                 y: coords.y,
               }}
               animate={{
-                y: shouldReduceMotion ? 0 : [0, -12, 0],
+                y: shouldReduceMotion ? 0 : [0, -10, 0],
               }}
-              transition={floatTransition as any}
-              className="relative w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[500px] aspect-square flex justify-center items-center"
+              transition={floatTransition}
+              className="relative w-full max-w-[410px] md:max-w-[480px] lg:max-w-[540px] aspect-[3/2] flex items-center justify-center"
             >
-              {/* Subtle Red Ambient Glow behind artwork */}
-              <div className="absolute inset-0 bg-[#EE1C25]/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen scale-90" />
+              <div
+                className="absolute inset-[-8%] pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at center, rgba(238,28,37,0.05), rgba(238,28,37,0.018) 42%, transparent 70%)",
+                }}
+              />
 
-              {/* Artwork wrapper with soft shadow */}
-              <div className="relative w-full h-full rounded-3xl overflow-hidden p-6 filter drop-shadow-[0_15px_40px_rgba(0,0,0,0.8)]">
-                <Image
-                  src="/assets/image.png"
-                  alt="Official Company Logo Artwork"
-                  fill
-                  priority
-                  sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 500px"
-                  className="object-contain pointer-events-none select-none transition-transform duration-500 scale-[1.02]"
-                />
-              </div>
+              {/* Hero Image */}
+              <Image
+                src="/assets/image2.png"
+                alt="The AI School Infinity Logo"
+                fill
+                priority
+                sizes="(max-width:768px) 100vw,
+                       (max-width:1200px) 50vw,
+                       540px"
+                className="object-contain pointer-events-none select-none mix-blend-multiply [mask-image:radial-gradient(ellipse_at_center,black_58%,rgba(0,0,0,0.9)_76%,transparent_100%)]"
+              />
             </motion.div>
           )}
         </div>
-
       </div>
+
+      {/* Bottom Fade */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(252,252,253,0), rgba(252,252,253,1))",
+        }}
+      />
     </section>
   );
 }

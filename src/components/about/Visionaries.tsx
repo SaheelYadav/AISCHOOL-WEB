@@ -103,9 +103,9 @@ export default function Visionaries() {
   );
 
   return (
-    <section id="leadership" className="w-full bg-[#020202] text-white py-24 px-6 md:px-12 relative overflow-hidden select-none border-b border-white/5">
+    <section id="leadership" className="w-full bg-white text-slate-900 py-24 px-6 md:px-12 relative overflow-hidden select-none border-b border-gray-200">
       {/* Red lighting accent */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] rounded-full bg-red-950/5 blur-[120px] pointer-events-none z-0" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] rounded-full bg-red-50 blur-[120px] pointer-events-none z-0" />
 
       <div className="relative z-10 max-w-7xl mx-auto space-y-24">
         
@@ -124,11 +124,11 @@ export default function Visionaries() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                className="w-full max-w-[350px] bg-neutral-900/30 border border-white/5 rounded-2xl overflow-hidden p-5 flex flex-col justify-between space-y-5 hover:-translate-y-1 transition-all duration-300 shadow-xl group/card"
+                className="w-full max-w-[350px] bg-white border border-gray-200 rounded-2xl overflow-hidden p-5 flex flex-col justify-between space-y-5 hover:-translate-y-1 transition-all duration-300 shadow-xl group/card"
               >
                 <div className="space-y-3.5">
                   {/* Portrait size: 340-380px reduced width/height */}
-                  <div className="relative w-full h-[320px] rounded-xl overflow-hidden bg-neutral-900 border border-white/5">
+                  <div className="relative w-full h-[320px] rounded-xl overflow-hidden bg-gray-50 border border-gray-200">
                     <Image 
                       src={leader.image} 
                       alt={leader.name} 
@@ -143,11 +143,11 @@ export default function Visionaries() {
                     <span className="text-[11px] font-black uppercase tracking-wider text-[#EE1C25]">
                       {leader.role}
                     </span>
-                    <h3 className="text-lg md:text-xl font-black font-heading tracking-tight text-white leading-tight">
+                    <h3 className="text-lg md:text-xl font-black font-heading tracking-tight text-slate-900 leading-tight">
                       {leader.name}
                     </h3>
                   </div>
-                  <p className="text-neutral-400 text-sm leading-relaxed font-sans font-medium line-clamp-3">
+                  <p className="text-slate-600 text-sm leading-relaxed font-sans font-medium line-clamp-3">
                     {leader.bio}
                   </p>
                 </div>
@@ -178,11 +178,11 @@ export default function Visionaries() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                className="w-full max-w-[260px] bg-neutral-900/20 border border-white/5 rounded-2xl overflow-hidden p-4 flex flex-col justify-between space-y-4 hover:-translate-y-1 transition-all duration-300 group/card"
+                className="w-full max-w-[260px] bg-white border border-gray-200 rounded-2xl overflow-hidden p-4 flex flex-col justify-between space-y-4 hover:-translate-y-1 transition-all duration-300 group/card"
               >
                 <div className="space-y-3">
                   {/* Secondary sized image: h-[230px] */}
-                  <div className="relative w-full h-[230px] rounded-lg overflow-hidden bg-neutral-900 border border-white/5">
+                  <div className="relative w-full h-[230px] rounded-lg overflow-hidden bg-gray-50 border border-gray-200">
                     <Image 
                       src={leader.image} 
                       alt={leader.name} 
@@ -196,7 +196,7 @@ export default function Visionaries() {
                     <span className="text-[10px] font-black uppercase tracking-wider text-[#EE1C25]">
                       {leader.role}
                     </span>
-                    <h3 className="text-base font-black font-heading tracking-tight text-white leading-tight">
+                    <h3 className="text-base font-black font-heading tracking-tight text-slate-900 leading-tight">
                       {leader.name}
                     </h3>
                   </div>
@@ -231,11 +231,11 @@ export default function Visionaries() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                className="w-full max-w-[220px] bg-neutral-900/10 border border-white/5 rounded-xl overflow-hidden p-3.5 flex flex-col justify-between space-y-3.5 hover:-translate-y-1 transition-all duration-300 group/card"
+                className="w-full max-w-[220px] bg-white border border-gray-200 rounded-xl overflow-hidden p-3.5 flex flex-col justify-between space-y-3.5 hover:-translate-y-1 transition-all duration-300 group/card"
               >
                 <div className="space-y-2.5">
                   {/* Compact sized image: h-[190px] */}
-                  <div className="relative w-full h-[190px] rounded-lg overflow-hidden bg-neutral-900 border border-white/5">
+                  <div className="relative w-full h-[190px] rounded-lg overflow-hidden bg-gray-50 border border-gray-200">
                     <Image 
                       src={leader.image} 
                       alt={leader.name} 
@@ -249,7 +249,7 @@ export default function Visionaries() {
                     <span className="text-[9px] font-black uppercase tracking-wider text-[#EE1C25]">
                       {leader.role}
                     </span>
-                    <h3 className="text-sm font-black font-heading tracking-tight text-white leading-tight line-clamp-1">
+                    <h3 className="text-sm font-black font-heading tracking-tight text-slate-900 leading-tight line-clamp-1">
                       {leader.name}
                     </h3>
                   </div>

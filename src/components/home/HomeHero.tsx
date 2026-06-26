@@ -96,13 +96,7 @@ export default function HomeHero() {
 
         {/* Left Side (45% on desktop layout) */}
         <div className="lg:col-span-5 space-y-7 flex flex-col items-start text-left z-20">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-50 border border-neutral-150/60 shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#EE1C25] animate-pulse" />
-            <span className="text-[10px] md:text-xs font-black uppercase tracking-wider text-neutral-400 font-sans">
-              India's First AI Learning Ecosystem
-            </span>
-          </div>
+
 
           {/* Heading */}
           <div className="space-y-4">
@@ -117,10 +111,7 @@ export default function HomeHero() {
             </p>
           </div>
 
-          {/* Description */}
-          <p className="text-gray-700 text-sm md:text-base leading-relaxed font-sans font-medium max-w-lg">
-            At TheAISCHOOL, we don't just teach. We empower students, professionals, and founders to build real products, resolve real-world challenges, and architect the AI ecosystem.
-          </p>
+
           {/* Action CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <a
@@ -274,7 +265,7 @@ export default function HomeHero() {
                       fill
                       priority
                       sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 260px"
-                      className="object-contain pointer-events-none select-none mix-blend-multiply transition-transform duration-700 ease-out group-hover:scale-[1.01]"
+                      className="object-contain pointer-events-none select-none transition-transform duration-700 ease-out group-hover:scale-[1.01] brightness-110 contrast-110 saturate-110"
                     />
                   </div>
                 </motion.div>

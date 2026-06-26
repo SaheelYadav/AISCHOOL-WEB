@@ -9,7 +9,6 @@ import EcosystemOrbit from "@/components/EcosystemOrbit";
 import MentorCarousel from "@/components/MentorCarousel";
 import XRayTransform from "@/components/XRayTransform";
 import PlacementJourney from "@/components/PlacementJourney";
-import FAQAccordion from "@/components/FAQAccordion";
 import RegistrationForm from "@/components/RegistrationForm";
 import Footer from "@/components/Footer";
 
@@ -76,10 +75,7 @@ export default function Home() {
       {/* 7. Placement Journey Cards */}
       <PlacementJourney />
 
-      {/* 8. FAQ Accordion Layer */}
-      <FAQAccordion />
-
-      {/* 9. Minimalist Registration Form */}
+      {/* 8. Minimalist Registration Form */}
       <RegistrationForm />
 
       {/* Footer */}

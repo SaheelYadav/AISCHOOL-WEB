@@ -25,37 +25,6 @@ import {
 // Reusable configuration matching mockup category detail and colors
 const innerRingCourses = [
   {
-    title: "Machine Learning",
-    icon: LineChart,
-    color: "#EA580C", // Orange
-    glowColor: "rgba(234, 88, 12, 0.25)",
-    desc: "Build predictive models and algorithms using real-world industrial datasets.",
-  },
-  {
-    title: "Deep Learning",
-    icon: Layers,
-    color: "#6366F1", // Purple
-    glowColor: "rgba(99, 102, 241, 0.25)",
-    desc: "Train complex multi-layered neural networks for cognitive computing tasks.",
-  },
-  {
-    title: "Computer Vision",
-    icon: Eye,
-    color: "#06B6D4", // Cyan
-    glowColor: "rgba(6, 182, 212, 0.25)",
-    desc: "Analyze visual data, build object detection, and run spatial recognition.",
-  },
-  {
-    title: "Agentic AI",
-    icon: Bot,
-    color: "#16A34A", // Green
-    glowColor: "rgba(22, 163, 74, 0.25)",
-    desc: "Deploy autonomous systems, self-improving agents, and reasoning networks.",
-  },
-];
-
-const outerRingCourses = [
-  {
     title: "Python Programming",
     icon: Terminal,
     color: "#2563EB", // Blue
@@ -90,12 +59,29 @@ const outerRingCourses = [
     glowColor: "rgba(234, 88, 12, 0.25)",
     desc: "Optimize LLM outputs, structure reasoning guidelines, and build prompt chains.",
   },
+];
+
+const outerRingCourses = [
   {
-    title: "Generative AI (Gen AI)",
-    icon: Sparkles,
-    color: "#D946EF", // Magenta
-    glowColor: "rgba(217, 70, 239, 0.25)",
-    desc: "Master generative neural models, LLM tuning, and synthetic content systems.",
+    title: "Machine Learning",
+    icon: LineChart,
+    color: "#EA580C", // Orange
+    glowColor: "rgba(234, 88, 12, 0.25)",
+    desc: "Build predictive models and algorithms using real-world industrial datasets.",
+  },
+  {
+    title: "Deep Learning",
+    icon: Layers,
+    color: "#6366F1", // Purple
+    glowColor: "rgba(99, 102, 241, 0.25)",
+    desc: "Train complex multi-layered neural networks for cognitive computing tasks.",
+  },
+  {
+    title: "Computer Vision",
+    icon: Eye,
+    color: "#06B6D4", // Cyan
+    glowColor: "rgba(6, 182, 212, 0.25)",
+    desc: "Analyze visual data, build object detection, and run spatial recognition.",
   },
   {
     title: "NLP (Natural Language Processing)",
@@ -103,6 +89,20 @@ const outerRingCourses = [
     color: "#EC4899", // Pink
     glowColor: "rgba(236, 72, 153, 0.25)",
     desc: "Process natural language, train transformers, and construct chatbots.",
+  },
+  {
+    title: "Agentic AI",
+    icon: Bot,
+    color: "#16A34A", // Green
+    glowColor: "rgba(22, 163, 74, 0.25)",
+    desc: "Deploy autonomous systems, self-improving agents, and reasoning networks.",
+  },
+  {
+    title: "Generative AI (Gen AI)",
+    icon: Sparkles,
+    color: "#D946EF", // Magenta
+    glowColor: "rgba(217, 70, 239, 0.25)",
+    desc: "Master generative neural models, LLM tuning, and synthetic content systems.",
   },
 ];
 
@@ -116,12 +116,6 @@ const checklistItems = [
 
 
 export default function EcosystemOrbit() {
-  const [hoveredCourse, setHoveredCourse] = useState<{
-    title: string;
-    desc: string;
-    color: string;
-  } | null>(null);
-
   // Helper to compute node positions on a circle
   const getPositions = (count: number, radiusPercent: number) => {
     return Array.from({ length: count }).map((_, idx) => {
@@ -130,7 +124,7 @@ export default function EcosystemOrbit() {
       // Center is at 50% 50%
       const x = 50 + radiusPercent * Math.cos(rad);
       const y = 50 + radiusPercent * Math.sin(rad);
-      return { x: `${x}%`, y: `${y}%` };
+      return { x: `${x.toFixed(4)}%`, y: `${y.toFixed(4)}%` };
     });
   };
 
@@ -195,8 +189,8 @@ export default function EcosystemOrbit() {
               {/* Concentric Orbit SVG Lines & Decorative Node Dots */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
                 {/* Rings */}
-                <circle cx="50" cy="50" r="25" stroke="#E5E7EB" strokeWidth="0.15" fill="none" opacity="0.6" strokeDasharray="1 1.5" />
-                <circle cx="50" cy="50" r="41" stroke="#E5E7EB" strokeWidth="0.15" fill="none" opacity="0.6" strokeDasharray="1 1.5" />
+                <circle cx="50" cy="50" r="25" stroke="#D1D5DB" strokeWidth="0.08" fill="none" opacity="0.8" strokeDasharray="1 1.5" />
+                <circle cx="50" cy="50" r="41" stroke="#D1D5DB" strokeWidth="0.08" fill="none" opacity="0.8" strokeDasharray="1 1.5" />
                 
                 {/* Decorative colored dots on orbit lines */}
                 <circle cx="50" cy="25" r="0.4" fill="#3B82F6" />
@@ -210,79 +204,47 @@ export default function EcosystemOrbit() {
                 <circle cx="9" cy="50" r="0.4" fill="#10B981" />
               </svg>
 
-              {/* Tooltip Overlay inside orbit box */}
-              {hoveredCourse && (
-                <div className="absolute top-2 left-2 z-30 w-64 bg-gray-950 text-white rounded-2xl p-4 shadow-xl border border-white/10 animate-fade-in">
-                  <span className="text-[9px] font-black tracking-widest uppercase" style={{ color: hoveredCourse.color }}>
-                    Course Track
-                  </span>
-                  <h4 className="text-sm font-bold mt-1">{hoveredCourse.title}</h4>
-                  <p className="text-[11px] text-neutral-400 font-semibold leading-relaxed mt-2">
-                    {hoveredCourse.desc}
-                  </p>
-                </div>
-              )}
-
               {/* STATIONARY CENTER BRAND NODE */}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white border border-red-100 shadow-2xl rounded-full flex flex-col items-center justify-center text-center p-4 select-none z-20 animate-pulse-slow">
-                {/* Soft center red radial glow inside node */}
-                <div className="absolute inset-2 bg-gradient-to-br from-[#EE1C25]/5 to-transparent rounded-full opacity-40 blur-md pointer-events-none" />
-                <span className="text-[8px] font-bold tracking-widest text-[#EE1C25] uppercase">THE</span>
-                <span className="text-sm font-black text-gray-900 tracking-tight uppercase font-sans mt-0.5">AI SCHOOL</span>
-                <span className="text-[8px] font-bold text-neutral-400 uppercase tracking-widest mt-0.5">YOUR AI JOURNEY</span>
-                
-                {/* Red infinity brand logo */}
-                <div className="mt-2 flex items-center justify-center">
-                  <svg className="w-5 h-3 text-[#EE1C25]" viewBox="0 0 100 50" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round">
-                    <path d="M25 15 C10 15, 10 35, 25 35 C40 35, 60 15, 75 15 C90 15, 90 35, 75 35 C60 35, 40 15, 25 15 Z" />
-                  </svg>
-                </div>
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none z-20 flex items-center justify-center">
+                <img src="/assets/logo.png" alt="The AI School Logo" className="w-36 h-auto object-contain relative z-10" />
               </div>
 
               {/* INNER RING: Clockwise rotation (80s) */}
               <div 
-                className="absolute inset-0 animate-orbit-cw hover:[animation-play-state:paused]"
+                className="absolute inset-0 animate-orbit-cw"
                 style={{ animationDuration: "80s" }}
               >
                 {innerRingCourses.map((course, idx) => {
                   const pos = innerPos[idx];
                   const Icon = course.icon;
-                  const isHovered = hoveredCourse?.title === course.title;
 
                   return (
                     <div
                       key={course.title}
-                      className="absolute -ml-14 -mt-20 flex flex-col items-center justify-center"
+                      className="absolute -ml-14 -mt-7 flex flex-col items-center justify-center"
                       style={{ 
                         left: pos.x, 
                         top: pos.y,
                         width: "112px",
                       }}
-                      onMouseEnter={() => setHoveredCourse(course)}
-                      onMouseLeave={() => setHoveredCourse(null)}
                     >
                       {/* Counter-rotating container to keep node upright */}
                       <div 
-                        className="animate-orbit-ccw flex flex-col items-center cursor-pointer transition-all duration-300"
+                        className="animate-orbit-ccw flex flex-col items-center"
                         style={{ 
-                          animationDuration: "80s",
-                          transform: isHovered ? "scale(1.08)" : ""
+                          animationDuration: "80s"
                         }}
                       >
                         {/* Circular node with icon */}
                         <div 
-                          className="w-14 h-14 rounded-full bg-white border border-neutral-200/80 shadow-xs flex items-center justify-center transition-all duration-300"
-                          style={{
-                            borderColor: isHovered ? course.color : "",
-                            boxShadow: isHovered ? `0 8px 20px -4px ${course.glowColor}` : "",
-                          }}
+                          className="w-14 h-14 rounded-full bg-white border border-neutral-200/80 shadow-xs flex items-center justify-center"
                         >
                           <Icon className="w-5 h-5" style={{ color: course.color }} />
                         </div>
                         
                         {/* Node Label underneath */}
                         <span 
-                          className="text-[9px] font-bold uppercase mt-2 tracking-wide text-center transition-colors leading-tight whitespace-normal max-w-[110px]"
+                          className="text-[9px] font-bold uppercase mt-2 tracking-wide text-center leading-tight whitespace-normal max-w-[110px]"
                           style={{ color: course.color }}
                         >
                           {course.title}
@@ -295,48 +257,40 @@ export default function EcosystemOrbit() {
 
               {/* OUTER RING: Counter-Clockwise rotation (120s) */}
               <div 
-                className="absolute inset-0 animate-orbit-ccw hover:[animation-play-state:paused]"
+                className="absolute inset-0 animate-orbit-ccw"
                 style={{ animationDuration: "120s" }}
               >
                 {outerRingCourses.map((course, idx) => {
                   const pos = outerPos[idx];
                   const Icon = course.icon;
-                  const isHovered = hoveredCourse?.title === course.title;
 
                   return (
                     <div
                       key={course.title}
-                      className="absolute -ml-14 -mt-20 flex flex-col items-center justify-center"
+                      className="absolute -ml-14 -mt-7 flex flex-col items-center justify-center"
                       style={{ 
                         left: pos.x, 
                         top: pos.y,
                         width: "112px",
                       }}
-                      onMouseEnter={() => setHoveredCourse(course)}
-                      onMouseLeave={() => setHoveredCourse(null)}
                     >
                       {/* Counter-rotating container to keep node upright */}
                       <div 
-                        className="animate-orbit-cw flex flex-col items-center cursor-pointer transition-all duration-300"
+                        className="animate-orbit-cw flex flex-col items-center"
                         style={{ 
-                          animationDuration: "120s",
-                          transform: isHovered ? "scale(1.08)" : ""
+                          animationDuration: "120s"
                         }}
                       >
                         {/* Circular node with icon */}
                         <div 
-                          className="w-14 h-14 rounded-full bg-white border border-neutral-200/80 shadow-xs flex items-center justify-center transition-all duration-300"
-                          style={{
-                            borderColor: isHovered ? course.color : "",
-                            boxShadow: isHovered ? `0 8px 20px -4px ${course.glowColor}` : "",
-                          }}
+                          className="w-14 h-14 rounded-full bg-white border border-neutral-200/80 shadow-xs flex items-center justify-center"
                         >
                           <Icon className="w-5 h-5" style={{ color: course.color }} />
                         </div>
                         
                         {/* Node Label underneath */}
                         <span 
-                          className="text-[9px] font-bold uppercase mt-2 tracking-wide text-center transition-colors leading-tight whitespace-normal max-w-[110px]"
+                          className="text-[9px] font-bold uppercase mt-2 tracking-wide text-center leading-tight whitespace-normal max-w-[110px]"
                           style={{ color: course.color }}
                         >
                           {course.title}

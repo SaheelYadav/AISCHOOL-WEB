@@ -78,7 +78,161 @@ export const BLOGS_DATA: BlogPost[] = [
       avatar: "/assets/srinath.png"
     },
     image: "/assets/blog_prompt_guide.png"
-  }
+  },
+{
+    slug: "what-is-generative-ai-a-beginners-guide",
+    title: "What is Generative AI? A Beginner's Guide",
+    excerpt: "What is Generative AI? A Beginner's Guide",
+    category: "Gen AI: Start Here!",
+    date: "April 19, 2025",
+    readTime: "5 min read",
+    author: {
+      name: "Deepak Yadav",
+      role: "AI Educator",
+      avatar: "/assets/student_1.png"
+    },
+    image: "/assets/blog_9.png"
+  },
+  {
+    slug: "the-evolution-of-generative-ai-from-gans-to-gpt-4",
+    title: "The Evolution of Generative AI: From GANs to GPT-4",
+    excerpt: "The Evolution of Generative AI: From GANs to GPT-4",
+    category: "Generative AI: Then vs Now",
+    date: "April 19, 2025",
+    readTime: "5 min read",
+    author: {
+      name: "Deepak Yadav",
+      role: "AI Educator",
+      avatar: "/assets/student_1.png"
+    },
+    image: "/assets/blog_10.png"
+  },
+  {
+    slug: "top-5-uses-of-generative-ai-youre-already-using-every-day-without-realizing-it",
+    title: "Top 5 Uses of Generative AI You're Already Using Every Day Without Realizing It",
+    excerpt: "Top 5 Uses of Generative AI You're Already Using Every Day Without Realizing It",
+    category: "Generative AI Is in Your Life!",
+    date: "April 19, 2025",
+    readTime: "5 min read",
+    author: {
+      name: "Deepak Yadav",
+      role: "AI Educator",
+      avatar: "/assets/student_1.png"
+    },
+    image: "/assets/blog_11.png"
+  },
+  {
+    slug: "how-transformer-models-transformed-generative-ai",
+    title: "How Transformer Models Transformed Generative AI",
+    excerpt: "How Transformer Models Transformed Generative AI",
+    category: "How Transformers Changed AI?",
+    date: "April 19, 2025",
+    readTime: "5 min read",
+    author: {
+      name: "Deepak Yadav",
+      role: "AI Educator",
+      avatar: "/assets/student_1.png"
+    },
+    image: "/assets/blog_12.png"
+  },
+  {
+    slug: "gans-vs-diffusion-models-what-drives-todays-ai-art",
+    title: "GANs vs. Diffusion Models: What Drives Today's AI Art?",
+    excerpt: "GANs vs. Diffusion Models: What Drives Today's AI Art?",
+    category: "What Makes AI Art Better?",
+    date: "April 19, 2025",
+    readTime: "5 min read",
+    author: {
+      name: "Deepak Yadav",
+      role: "AI Educator",
+      avatar: "/assets/student_1.png"
+    },
+    image: "/assets/blog_13.png"
+  },
+  {
+    slug: "behind-the-magic-the-math-behind-generative-ai",
+    title: "Behind the Magic: The Math Behind Generative AI",
+    excerpt: "Behind the Magic: The Math Behind Generative AI",
+    category: "The Math Behind Gen AI",
+    date: "April 19, 2025",
+    readTime: "5 min read",
+    author: {
+      name: "Deepak Yadav",
+      role: "AI Educator",
+      avatar: "/assets/student_1.png"
+    },
+    image: "/assets/blog_14.png"
+  },
+  {
+    slug: "generative-ai-in-healthcare-from-drug-discovery-to-diagnosis",
+    title: "Generative AI in Healthcare: From Drug Discovery to Diagnosis",
+    excerpt: "Generative AI in Healthcare: From Drug Discovery to Diagnosis",
+    category: "AI is Changing Healthcare!",
+    date: "April 19, 2025",
+    readTime: "5 min read",
+    author: {
+      name: "Deepak Yadav",
+      role: "AI Educator",
+      avatar: "/assets/student_1.png"
+    },
+    image: "/assets/blog_15.png"
+  },
+  {
+    slug: "how-generative-ai-is-revolutionizing-the-game-in-content-creation",
+    title: "How Generative AI is Revolutionizing the Game in Content Creation",
+    excerpt: "How Generative AI is Revolutionizing the Game in Content Creation",
+    category: "AI Powers the Future of Content!",
+    date: "April 19, 2025",
+    readTime: "5 min read",
+    author: {
+      name: "Deepak Yadav",
+      role: "AI Educator",
+      avatar: "/assets/student_1.png"
+    },
+    image: "/assets/blog_16.png"
+  },
+  {
+    slug: "getting-started-with-midjourney-how-to-make-ai-art",
+    title: "Getting Started with Midjourney: How to Make AI Art",
+    excerpt: "Getting Started with Midjourney: How to Make AI Art",
+    category: "Start Making AI Art Today!",
+    date: "April 19, 2025",
+    readTime: "5 min read",
+    author: {
+      name: "Deepak Yadav",
+      role: "AI Educator",
+      avatar: "/assets/student_1.png"
+    },
+    image: "/assets/blog_17.png"
+  },
+  {
+    slug: "building-a-simple-text-generator-with-gpt-3-api",
+    title: "Building a Simple Text Generator with GPT-3 API",
+    excerpt: "Building a Simple Text Generator with GPT-3 API",
+    category: "Your First GPT-3 App Starts Here!",
+    date: "April 19, 2025",
+    readTime: "5 min read",
+    author: {
+      name: "Deepak Yadav",
+      role: "AI Educator",
+      avatar: "/assets/student_1.png"
+    },
+    image: "/assets/blog_18.png"
+  },
+  {
+    slug: "top-10-generative-ai-tools-for-creatives-in-2025",
+    title: "Top 10 Generative AI Tools for Creatives in 2025",
+    excerpt: "Top 10 Generative AI Tools for Creatives in 2025",
+    category: "Must-Have AI Tools in 2025!",
+    date: "April 19, 2025",
+    readTime: "5 min read",
+    author: {
+      name: "Deepak Yadav",
+      role: "AI Educator",
+      avatar: "/assets/student_1.png"
+    },
+    image: "/assets/blog_19.png"
+  },
 ];
 
 export default function BlogsPage() {

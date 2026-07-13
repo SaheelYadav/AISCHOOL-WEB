@@ -3,7 +3,6 @@
 import React from "react";
 import {
   BookOpen,
-  Terminal,
   GitBranch,
   Users,
   Code,

@@ -13,7 +13,7 @@ export default function WorldsLargestAIHackathon() {
             COMING SOON
           </span>
           <h2 className="text-3xl md:text-5xl font-black text-gray-950 tracking-tight leading-tight">
-            World&apos;s Largest AI Hackathon
+            World&#39;s Largest AI Hackathon
           </h2>
           <p className="text-sm font-semibold text-neutral-500 max-w-xl mx-auto leading-relaxed">
             A next-generation interactive AI hackathon platform is currently under development.

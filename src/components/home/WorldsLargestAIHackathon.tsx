@@ -68,20 +68,22 @@ const features = [
   }
 ];
 
-// Timeline Stages (Section 4)
+// Hackathon Cycle / Funnel Steps (Section 4)
 const timelineSteps = [
-  { stage: "Registration", desc: "Form teams & submit ideas" },
-  { stage: "Screening", desc: "Expert vetting & shortlisting" },
-  { stage: "Mentorship", desc: "1-on-1 architectural refinement" },
-  { stage: "Prototype Sprint", desc: "30 hours of continuous coding" },
-  { stage: "Grand Finale", desc: "Pitching prototypes to jury" },
-  { stage: "Hiring & Incubation", desc: "Fast-track career & startup growth" }
+  { stage: "Registrations", desc: "3500+ Teams Registered" },
+  { stage: "Completed Applications", desc: "839 Applications Submitted" },
+  { stage: "Initial Screening", desc: "598 Applications after TEC Evaluation" },
+  { stage: "Shortlisted for Hackathon", desc: "115 Teams Qualified" },
+  { stage: "Active Participation", desc: "72 Teams Competed in Hackathon" },
+  { stage: "Mentor Selection", desc: "41 Teams Shortlisted After Mentor Evaluation" },
+  { stage: "Jury Shortlist", desc: "19 Finalists Evaluated by Grand Jury" },
+  { stage: "Final Selection", desc: "Top 15 Winners Selected by TCOE India & DoT Expert Committee" }
 ];
 
 // Animated Statistics (Section 5)
 const statsData = [
   { value: 19, label: "Finalists Shortlisted" },
-  { value: 350, label: "Teams Registered", suffix: "+" },
+  { value: 3500, label: "Teams Registered", suffix: "+" },
   { value: 113, label: "Active Participants" },
   { value: 33, label: "Colleges Represented" },
   { value: 7, label: "Industry Mentors" }
@@ -110,8 +112,23 @@ const galleryImages = [
     className: "md:col-span-1 md:row-span-1"
   },
   {
-    src: "/images/hackathon_group3.jpg",
+    src: "/images/hackathon_group3.png",
     alt: "Delegates and organizers group photo at hackathon summit",
+    className: "md:col-span-2 md:row-span-1"
+  },
+  {
+    src: "/images/hackathon_team1.png",
+    alt: "Hackathon team working space session",
+    className: "md:col-span-1 md:row-span-1"
+  },
+  {
+    src: "/images/hackathon_working2.png",
+    alt: "Mentors guiding teams on network protocols",
+    className: "md:col-span-1 md:row-span-1"
+  },
+  {
+    src: "/images/hackathon_felicitation1.png",
+    alt: "Award presentation to the top winners",
     className: "md:col-span-2 md:row-span-1"
   }
 ];
@@ -245,19 +262,19 @@ export default function WorldsLargestAIHackathon() {
           </div>
         </div>
 
-        {/* ================= SECTION 4: INTERACTIVE TIMELINE ================= */}
+        {/* ================= SECTION 4: HACKATHON CYCLE TIMELINE ================= */}
         <div className="space-y-12">
           <div className="text-center space-y-3">
             <span className="text-xs font-bold uppercase tracking-widest text-[#EE1C25]">
               Structure & Flow
             </span>
             <h3 className="text-3xl font-black text-gray-950 uppercase">
-              The Hackathon Roadmap
+              The Hackathon Cycle
             </h3>
           </div>
 
           <div className="relative w-full overflow-hidden py-4">
-            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-6 relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
               {timelineSteps.map((step, idx) => (
                 <div 
                   key={idx}

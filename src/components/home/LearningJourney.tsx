@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { ArrowRight, BookOpen, BrainCircuit, Bot, Sparkles } from "lucide-react";
+import { BookOpen, BrainCircuit, Bot, Sparkles } from "lucide-react";
 
 const stages = [
   {
@@ -48,19 +48,13 @@ export default function LearningJourney() {
 
   return (
     <section className="w-full bg-slate-50/50 py-24 px-6 md:px-12 border-t border-gray-100 relative z-10 font-heading overflow-hidden">
-
       {/* Subtle ambient lighting */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[700px] h-[300px] bg-red-500/5 blur-[120px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
           {/* ================= LEFT SIDE: HEADLINE & CTA ================= */}
           <div className="lg:col-span-5 space-y-6 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-red-50 text-[#EE1C25] rounded-full text-xs font-bold uppercase tracking-wider border border-red-100 w-fit">
-
-            </div>
-
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-950 tracking-tight leading-tight">
               Your Journey Into AI Starts Here
             </h2>
@@ -75,35 +69,39 @@ export default function LearningJourney() {
                 className="group inline-flex items-center gap-2.5 bg-[#EE1C25] hover:bg-[#d61920] text-white font-bold text-sm uppercase tracking-wider px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
               >
                 Explore Programs
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
               </a>
             </div>
           </div>
 
           {/* ================= RIGHT SIDE: INTERACTIVE PATHWAY ================= */}
           <div className="lg:col-span-7 relative min-h-[520px] flex items-center justify-center">
-
             {/* Desktop Visualization (Hidden on Mobile/Tablet) */}
-            <div className="hidden lg:block w-full h-full relative min-h-[520px]">
-
+            <div className="hidden lg:block w-[600px] h-[500px] relative select-none">
               {/* SVG pathways from center to stage cards */}
               <svg
-                className="absolute inset-0 w-full h-full pointer-events-none"
+                className="absolute inset-0 w-full h-full pointer-events-none z-10"
                 viewBox="0 0 600 500"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <defs>
-                  <linearGradient id="glow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#EE1C25" stopOpacity="0.2" />
-                    <stop offset="100%" stopColor="#EE1C25" stopOpacity="0.8" />
-                  </linearGradient>
-                </defs>
-
-                {/* Left/Right Paths (connected to center point 300, 250) */}
+                {/* 
+                  Center Node is at (300, 250) with radius 56.
+                  Outer boundaries of the center node:
+                  Top: (300, 194), Bottom: (300, 306), Left: (244, 250), Right: (356, 250)
+                  
+                  Card Positions:
+                  Card 1 (Top Left): Center (140, 115)
+                  Card 2 (Bottom Left): Center (140, 385)
+                  Card 3 (Top Right): Center (460, 115)
+                  Card 4 (Bottom Right): Center (460, 385)
+                */}
+                
                 {/* Stage 1 path (Top Left) */}
                 <path
-                  d="M 170 110 C 230 110, 240 250, 300 250"
+                  d="M 140 115 C 200 115, 220 220, 260 230"
                   stroke={activeStage === 0 ? "#EE1C25" : "#E5E7EB"}
                   strokeWidth={activeStage === 0 ? "3" : "1.5"}
                   className="transition-all duration-300"
@@ -111,7 +109,7 @@ export default function LearningJourney() {
 
                 {/* Stage 2 path (Bottom Left) */}
                 <path
-                  d="M 170 390 C 230 390, 240 250, 300 250"
+                  d="M 140 385 C 200 385, 220 280, 260 270"
                   stroke={activeStage === 1 ? "#EE1C25" : "#E5E7EB"}
                   strokeWidth={activeStage === 1 ? "3" : "1.5"}
                   className="transition-all duration-300"
@@ -119,7 +117,7 @@ export default function LearningJourney() {
 
                 {/* Stage 3 path (Top Right) */}
                 <path
-                  d="M 430 110 C 370 110, 360 250, 300 250"
+                  d="M 460 115 C 400 115, 380 220, 340 230"
                   stroke={activeStage === 2 ? "#EE1C25" : "#E5E7EB"}
                   strokeWidth={activeStage === 2 ? "3" : "1.5"}
                   className="transition-all duration-300"
@@ -127,21 +125,21 @@ export default function LearningJourney() {
 
                 {/* Stage 4 path (Bottom Right) */}
                 <path
-                  d="M 430 390 C 370 390, 360 250, 300 250"
+                  d="M 460 385 C 400 385, 380 280, 340 270"
                   stroke={activeStage === 3 ? "#EE1C25" : "#E5E7EB"}
                   strokeWidth={activeStage === 3 ? "3" : "1.5"}
                   className="transition-all duration-300"
                 />
               </svg>
 
-              {/* CENTER HUB */}
+              {/* CENTER HUB (Exactly at 300, 250) */}
               <div
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 bg-white border-2 border-neutral-200 rounded-full flex flex-col items-center justify-center shadow-xl z-20 select-none animate-subtle-float"
+                className="absolute left-[300px] top-[250px] -translate-x-1/2 -translate-y-1/2 w-28 h-28 bg-white border border-neutral-200 rounded-full flex items-center justify-center shadow-md z-20 select-none animate-subtle-float"
               >
-                <div className="absolute inset-1.5 border border-dashed border-red-200 rounded-full" />
-                <div className="relative w-[70%] h-[70%]">
+                <div className="absolute inset-1.5 border border-dashed border-red-200/50 rounded-full" />
+                <div className="relative w-[65%] h-[65%]">
                   <Image
-                    src="/images/logo.png"
+                    src="/assets/logo.png"
                     alt="The AI School Logo"
                     fill
                     sizes="80px"
@@ -151,11 +149,11 @@ export default function LearningJourney() {
                 </div>
               </div>
 
-              {/* STAGE 1 CARD (Top Left) */}
+              {/* STAGE 1 CARD (Top Left - Center 140, 115 -> Left 36, Top 30) */}
               <div
                 onMouseEnter={() => setActiveStage(0)}
                 onMouseLeave={() => setActiveStage(null)}
-                className="absolute top-4 left-4 w-52 group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none animate-float-delay-1"
+                className="absolute left-[36px] top-[30px] w-52 group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none animate-float-delay-1 z-30"
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="p-2 bg-red-50 text-[#EE1C25] border border-red-100 rounded-lg">
@@ -175,11 +173,11 @@ export default function LearningJourney() {
                 </div>
               </div>
 
-              {/* STAGE 2 CARD (Bottom Left) */}
+              {/* STAGE 2 CARD (Bottom Left - Center 140, 385 -> Left 36, Top 300) */}
               <div
                 onMouseEnter={() => setActiveStage(1)}
                 onMouseLeave={() => setActiveStage(null)}
-                className="absolute bottom-4 left-4 w-52 group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none animate-float-delay-2"
+                className="absolute left-[36px] top-[300px] w-52 group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none animate-float-delay-2 z-30"
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="p-2 bg-red-50 text-[#EE1C25] border border-red-100 rounded-lg">
@@ -199,11 +197,11 @@ export default function LearningJourney() {
                 </div>
               </div>
 
-              {/* STAGE 3 CARD (Top Right) */}
+              {/* STAGE 3 CARD (Top Right - Center 460, 115 -> Left 348, Top 30) */}
               <div
                 onMouseEnter={() => setActiveStage(2)}
                 onMouseLeave={() => setActiveStage(null)}
-                className="absolute top-4 right-4 w-56 group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none animate-float-delay-3"
+                className="absolute left-[348px] top-[30px] w-56 group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none animate-float-delay-3 z-30"
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="p-2 bg-red-50 text-[#EE1C25] border border-red-100 rounded-lg">
@@ -223,11 +221,11 @@ export default function LearningJourney() {
                 </div>
               </div>
 
-              {/* STAGE 4 CARD (Bottom Right) */}
+              {/* STAGE 4 CARD (Bottom Right - Center 460, 385 -> Left 348, Top 300) */}
               <div
                 onMouseEnter={() => setActiveStage(3)}
                 onMouseLeave={() => setActiveStage(null)}
-                className="absolute bottom-4 right-4 w-56 group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none animate-float-delay-4"
+                className="absolute left-[348px] top-[300px] w-56 group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none animate-float-delay-4 z-30"
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="p-2 bg-red-50 text-[#EE1C25] border border-red-100 rounded-lg">
@@ -246,7 +244,6 @@ export default function LearningJourney() {
                   ))}
                 </div>
               </div>
-
             </div>
 
             {/* Mobile / Tablet Roadmap Layout (Hidden on Desktop) */}
@@ -281,9 +278,7 @@ export default function LearningJourney() {
                 );
               })}
             </div>
-
           </div>
-
         </div>
       </div>
 

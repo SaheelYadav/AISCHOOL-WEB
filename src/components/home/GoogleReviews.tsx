@@ -86,7 +86,7 @@ function ReviewCard({ review }: { review: Review }) {
         </div>
       </div>
 
-      {/* Google Review Details Widget (styled exactly like PlacementJourney but review-centric) */}
+      {/* Google Review Details Widget */}
       <div className="bg-gray-50 border border-gray-100 rounded-2xl p-4 flex items-center justify-between gap-2">
         <div className="flex items-center space-x-2.5">
           <div className="flex gap-0.5">
@@ -99,7 +99,6 @@ function ReviewCard({ review }: { review: Review }) {
           </div>
         </div>
 
-        {/* ArrowRightLeft SVG replacement or divider */}
         <div className="text-xs font-black text-gray-400">|</div>
 
         <div className="text-center">
@@ -116,7 +115,7 @@ function ReviewCard({ review }: { review: Review }) {
           <div className="w-8 h-8 bg-white border border-gray-200 rounded-lg flex items-center justify-center shrink-0 shadow-xs relative">
             <div className="relative w-4 h-4">
               <Image
-                src="/images/logo.png"
+                src="/assets/logo.png"
                 alt="Google Logo"
                 fill
                 sizes="16px"
@@ -183,7 +182,7 @@ export default function GoogleReviews() {
           <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-white to-transparent z-20 pointer-events-none" />
 
           {/* Marquee Mover */}
-          <div className="flex gap-8 animate-carousel-left hover:pause-animation w-max">
+          <div className="flex gap-8 animate-marquee-left hover:pause-animation w-max will-change-transform">
             {duplicatedReviews.map((review, idx) => (
               <ReviewCard key={`${review.name}-${idx}`} review={review} />
             ))}
@@ -193,6 +192,25 @@ export default function GoogleReviews() {
       </div>
 
       <style jsx global>{`
+        @keyframes marqueeLeft {
+          0% {
+            transform: translate3d(0, 0, 0);
+          }
+          100% {
+            transform: translate3d(-33.3333%, 0, 0);
+          }
+        }
+        .animate-marquee-left {
+          animation: marqueeLeft 30s linear infinite;
+        }
+        .hover\\:pause-animation:hover {
+          animation-play-state: paused;
+        }
+        @media (max-width: 768px) {
+          .animate-marquee-left {
+            animation-duration: 45s;
+          }
+        }
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }

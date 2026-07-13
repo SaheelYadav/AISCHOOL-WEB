@@ -1,78 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import Image from "next/image";
-import { ArrowRight, BookOpen, BrainCircuit, Bot, Sparkles } from "lucide-react";
-
-// Layout Geometry Constants
-const CONTAINER_WIDTH = 600;
-const CONTAINER_HEIGHT = 500;
-
-const CENTER_X = CONTAINER_WIDTH / 2; // 300
-const CENTER_Y = CONTAINER_HEIGHT / 2; // 250
-
-const CARD_WIDTH = 220;
-const CARD_HEIGHT = 160;
-
-const NODE_SIZE = 112;
-const NODE_RADIUS = NODE_SIZE / 2; // 56
-
-const OUTER_MARGIN_X = 40;
-const OUTER_MARGIN_Y = 40;
-
-const LEFT_X = OUTER_MARGIN_X; // 40
-const RIGHT_X = CONTAINER_WIDTH - OUTER_MARGIN_X - CARD_WIDTH; // 600 - 40 - 220 = 340
-
-const TOP_Y = OUTER_MARGIN_Y; // 40
-const BOTTOM_Y = CONTAINER_HEIGHT - OUTER_MARGIN_Y - CARD_HEIGHT; // 500 - 40 - 160 = 300
-
-// Helper to calculate exact start and end points for SVG paths
-// Start points are on the boundary of the center node (radius 56).
-// End points connect to the nearest corner/edge of the stage cards.
-const getPathData = (stageIndex: number) => {
-  // Center is at (300, 250)
-  // Distance from center to corners for bezier target control points
-  switch (stageIndex) {
-    case 0: { // Top Left (Card sits between X: 40-260, Y: 40-200)
-      // Card bottom-right corner is at (260, 200)
-      // Path starts at northwest edge of center node: (300 - cos(45)*56, 250 - sin(45)*56)
-      const startX = CENTER_X - NODE_RADIUS * Math.SQRT1_2;
-      const startY = CENTER_Y - NODE_RADIUS * Math.SQRT1_2;
-      const endX = LEFT_X + CARD_WIDTH; // 260
-      const endY = TOP_Y + CARD_HEIGHT; // 200
-      return `M ${endX} ${endY} C ${(endX + startX) / 2} ${endY}, ${startX} ${(endY + startY) / 2}, ${startX} ${startY}`;
-    }
-    case 1: { // Bottom Left (Card sits between X: 40-260, Y: 300-460)
-      // Card top-right corner is at (260, 300)
-      // Path starts at southwest edge of center node
-      const startX = CENTER_X - NODE_RADIUS * Math.SQRT1_2;
-      const startY = CENTER_Y + NODE_RADIUS * Math.SQRT1_2;
-      const endX = LEFT_X + CARD_WIDTH; // 260
-      const endY = BOTTOM_Y; // 300
-      return `M ${endX} ${endY} C ${(endX + startX) / 2} ${endY}, ${startX} ${(endY + startY) / 2}, ${startX} ${startY}`;
-    }
-    case 2: { // Top Right (Card sits between X: 340-560, Y: 40-200)
-      // Card bottom-left corner is at (340, 200)
-      // Path starts at northeast edge of center node
-      const startX = CENTER_X + NODE_RADIUS * Math.SQRT1_2;
-      const startY = CENTER_Y - NODE_RADIUS * Math.SQRT1_2;
-      const endX = RIGHT_X; // 340
-      const endY = TOP_Y + CARD_HEIGHT; // 200
-      return `M ${endX} ${endY} C ${(endX + startX) / 2} ${endY}, ${startX} ${(endY + startY) / 2}, ${startX} ${startY}`;
-    }
-    case 3: { // Bottom Right (Card sits between X: 340-560, Y: 300-460)
-      // Card top-left corner is at (340, 300)
-      // Path starts at southeast edge of center node
-      const startX = CENTER_X + NODE_RADIUS * Math.SQRT1_2;
-      const startY = CENTER_Y + NODE_RADIUS * Math.SQRT1_2;
-      const endX = RIGHT_X; // 340
-      const endY = BOTTOM_Y; // 300
-      return `M ${endX} ${endY} C ${(endX + startX) / 2} ${endY}, ${startX} ${(endY + startY) / 2}, ${startX} ${startY}`;
-    }
-    default:
-      return "";
-  }
-};
+import { BookOpen, BrainCircuit, Bot, Sparkles } from "lucide-react";
 
 const stages = [
   {
@@ -113,8 +43,102 @@ const stages = [
   },
 ];
 
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 export default function LearningJourney() {
   const [activeStage, setActiveStage] = useState<number | null>(null);
+
+  // References for dynamic positioning
+  const containerRef = useRef<HTMLDivElement>(null);
+  const centerRef = useRef<HTMLDivElement>(null);
+  const card1Ref = useRef<HTMLDivElement>(null);
+  const card2Ref = useRef<HTMLDivElement>(null);
+  const card3Ref = useRef<HTMLDivElement>(null);
+  const card4Ref = useRef<HTMLDivElement>(null);
+
+  // Calculated SVG paths
+  const [paths, setPaths] = useState<string[]>(["", "", "", ""]);
+
+  const calculatePaths = () => {
+    if (
+      !containerRef.current ||
+      !centerRef.current ||
+      !card1Ref.current ||
+      !card2Ref.current ||
+      !card3Ref.current ||
+      !card4Ref.current
+    ) {
+      return;
+    }
+
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const centerRect = centerRef.current.getBoundingClientRect();
+
+    // Visual geometric center of logo circle
+    const cX = centerRect.left - containerRect.left + centerRect.width / 2;
+    const cY = centerRect.top - containerRect.top + centerRect.height / 2;
+    const radius = centerRect.width / 2;
+
+    const cards = [card1Ref, card2Ref, card3Ref, card4Ref];
+    const newPaths = cards.map((ref, idx) => {
+      if (!ref.current) return "";
+      const cardRect = ref.current.getBoundingClientRect();
+
+      let targetX = 0;
+      let targetY = 0;
+
+      // Anchor to the center of the nearest edge (vertical center)
+      if (idx === 0 || idx === 1) { // Left-side cards: Connect to right-edge, vertical center
+        targetX = cardRect.right - containerRect.left;
+        targetY = cardRect.top - containerRect.top + cardRect.height / 2;
+      } else { // Right-side cards: Connect to left-edge, vertical center
+        targetX = cardRect.left - containerRect.left;
+        targetY = cardRect.top - containerRect.top + cardRect.height / 2;
+      }
+
+      // Compute vector from logo center to the card edge center point
+      const dx = targetX - cX;
+      const dy = targetY - cY;
+      const length = Math.sqrt(dx * dx + dy * dy);
+
+      // Normalize direction vector and multiply by logo radius
+      // This ensures the starting point is exactly on the logo circumference
+      const startX = cX + (dx / length) * radius;
+      const startY = cY + (dy / length) * radius;
+
+      // Generate dynamic symmetrical cubic Bezier curves
+      const controlX1 = (targetX + startX) / 2;
+      const controlY1 = startY;
+      const controlX2 = (targetX + startX) / 2;
+      const controlY2 = targetY;
+
+      return `M ${startX} ${startY} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${targetX} ${targetY}`;
+    });
+
+    setPaths(newPaths);
+  };
+
+  useIsomorphicLayoutEffect(() => {
+    calculatePaths();
+
+    // Setting up ResizeObserver to recalculate paths dynamically on layout changes
+    if (typeof ResizeObserver !== "undefined") {
+      const observer = new ResizeObserver(() => {
+        calculatePaths();
+      });
+
+      [containerRef, centerRef, card1Ref, card2Ref, card3Ref, card4Ref].forEach((ref) => {
+        if (ref.current) observer.observe(ref.current);
+      });
+
+      return () => {
+        observer.disconnect();
+      };
+    } else {
+      window.addEventListener("resize", calculatePaths);
+      return () => window.removeEventListener("resize", calculatePaths);
+    }
+  }, []);
 
   return (
     <section className="w-full bg-slate-50/50 py-24 px-6 md:px-12 border-t border-gray-100 relative z-10 font-heading overflow-hidden">
@@ -139,7 +163,9 @@ export default function LearningJourney() {
                 className="group inline-flex items-center gap-2.5 bg-[#EE1C25] hover:bg-[#d61920] text-white font-bold text-sm uppercase tracking-wider px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
               >
                 Explore Programs
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
               </a>
             </div>
           </div>
@@ -148,20 +174,20 @@ export default function LearningJourney() {
           <div className="lg:col-span-7 relative min-h-[520px] flex items-center justify-center">
             {/* Desktop Visualization (Hidden on Mobile/Tablet) */}
             <div 
-              className="hidden lg:block relative select-none"
-              style={{ width: CONTAINER_WIDTH, height: CONTAINER_HEIGHT }}
+              ref={containerRef}
+              className="hidden lg:block relative select-none w-[600px] h-[500px]"
             >
-              {/* SVG pathways from center to stage cards */}
+              {/* SVG pathways calculated dynamically */}
               <svg
                 className="absolute inset-0 w-full h-full pointer-events-none z-10"
-                viewBox={`0 0 ${CONTAINER_WIDTH} ${CONTAINER_HEIGHT}`}
+                viewBox="0 0 600 500"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 {stages.map((_, idx) => (
                   <path
                     key={idx}
-                    d={getPathData(idx)}
+                    d={paths[idx]}
                     stroke={activeStage === idx ? "#EE1C25" : "#E5E7EB"}
                     strokeWidth={activeStage === idx ? "3" : "1.5"}
                     className="transition-all duration-300"
@@ -169,15 +195,16 @@ export default function LearningJourney() {
                 ))}
               </svg>
 
-              {/* CENTER HUB (Exactly centered mathematically) */}
+              {/* CENTER HUB (Z-Index 30) */}
               <div
-                className="absolute bg-white border border-neutral-200 rounded-full flex items-center justify-center shadow-md z-20 select-none"
+                ref={centerRef}
+                className="absolute bg-white border border-neutral-200 rounded-full flex items-center justify-center shadow-md z-30 select-none"
                 style={{
-                  left: CENTER_X,
-                  top: CENTER_Y,
+                  left: "50%",
+                  top: "50%",
                   transform: "translate(-50%, -50%)",
-                  width: NODE_SIZE,
-                  height: NODE_SIZE,
+                  width: "112px",
+                  height: "112px",
                 }}
               >
                 <div className="absolute inset-1.5 border border-dashed border-red-200/50 rounded-full" />
@@ -193,16 +220,17 @@ export default function LearningJourney() {
                 </div>
               </div>
 
-              {/* STAGE 1 CARD (Top Left) */}
+              {/* STAGE 1 CARD (Top Left - Z-Index 20) */}
               <div
+                ref={card1Ref}
                 onMouseEnter={() => setActiveStage(0)}
                 onMouseLeave={() => setActiveStage(null)}
-                className="absolute group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none z-30"
+                className="absolute group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none z-20"
                 style={{
-                  left: LEFT_X,
-                  top: TOP_Y,
-                  width: CARD_WIDTH,
-                  height: CARD_HEIGHT,
+                  left: "40px",
+                  top: "40px",
+                  width: "220px",
+                  height: "160px",
                 }}
               >
                 <div className="flex items-center justify-between mb-3">
@@ -223,16 +251,17 @@ export default function LearningJourney() {
                 </div>
               </div>
 
-              {/* STAGE 2 CARD (Bottom Left) */}
+              {/* STAGE 2 CARD (Bottom Left - Z-Index 20) */}
               <div
+                ref={card2Ref}
                 onMouseEnter={() => setActiveStage(1)}
                 onMouseLeave={() => setActiveStage(null)}
-                className="absolute group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none z-30"
+                className="absolute group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none z-20"
                 style={{
-                  left: LEFT_X,
-                  top: BOTTOM_Y,
-                  width: CARD_WIDTH,
-                  height: CARD_HEIGHT,
+                  left: "40px",
+                  top: "300px",
+                  width: "220px",
+                  height: "160px",
                 }}
               >
                 <div className="flex items-center justify-between mb-3">
@@ -253,16 +282,17 @@ export default function LearningJourney() {
                 </div>
               </div>
 
-              {/* STAGE 3 CARD (Top Right) */}
+              {/* STAGE 3 CARD (Top Right - Z-Index 20) */}
               <div
+                ref={card3Ref}
                 onMouseEnter={() => setActiveStage(2)}
                 onMouseLeave={() => setActiveStage(null)}
-                className="absolute group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none z-30"
+                className="absolute group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none z-20"
                 style={{
-                  left: RIGHT_X,
-                  top: TOP_Y,
-                  width: CARD_WIDTH,
-                  height: CARD_HEIGHT,
+                  left: "340px",
+                  top: "40px",
+                  width: "220px",
+                  height: "160px",
                 }}
               >
                 <div className="flex items-center justify-between mb-3">
@@ -283,16 +313,17 @@ export default function LearningJourney() {
                 </div>
               </div>
 
-              {/* STAGE 4 CARD (Bottom Right) */}
+              {/* STAGE 4 CARD (Bottom Right - Z-Index 20) */}
               <div
+                ref={card4Ref}
                 onMouseEnter={() => setActiveStage(3)}
                 onMouseLeave={() => setActiveStage(null)}
-                className="absolute group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none z-30"
+                className="absolute group bg-white border border-neutral-200/80 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE1C25] transition-all duration-300 cursor-pointer select-none z-20"
                 style={{
-                  left: RIGHT_X,
-                  top: BOTTOM_Y,
-                  width: CARD_WIDTH,
-                  height: CARD_HEIGHT,
+                  left: "340px",
+                  top: "300px",
+                  width: "220px",
+                  height: "160px",
                 }}
               >
                 <div className="flex items-center justify-between mb-3">

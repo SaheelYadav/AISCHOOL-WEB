@@ -17,19 +17,19 @@ import {
 const steps = [
   {
     number: "01",
-    title: "AI Readiness Assessment",
-    desc: "Evaluate the learner's current skills, aptitude and career goals before beginning the program.",
-    icon: Users,
-    detailTitle: "Skill Profiling",
-    bullets: ["Technical aptitude screening", "Career goal mapping", "Personalized learning roadmap"],
-  },
-  {
-    number: "02",
     title: "Program Enrollment",
     desc: "Admission confirmation, onboarding, LMS access and mentor allocation.",
     icon: Sparkles,
     detailTitle: "Onboarding & Setup",
     bullets: ["LMS platform activation", "Community Slack onboarding", "Mentor match alignment"],
+  },
+  {
+    number: "02",
+    title: "AI Readiness Assessment",
+    desc: "Evaluate the learner's current skills, aptitude and career goals before beginning the program.",
+    icon: Users,
+    detailTitle: "Skill Profiling",
+    bullets: ["Technical aptitude screening", "Career goal mapping", "Personalized learning roadmap"],
   },
   {
     number: "03",

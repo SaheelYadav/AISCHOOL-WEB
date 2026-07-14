@@ -194,7 +194,9 @@ export default function WorldsLargestAIHackathon() {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <span className="text-2xl font-black tracking-tight leading-none">
+                  <span className={`text-2xl font-black tracking-tight leading-none ${
+                    isHero ? "text-white" : "text-gray-950"
+                  }`}>
                     {idx === 0 ? `${visibleStats[0]}+` : 
                      idx === 1 ? `${visibleStats[1]}+ Hrs` : 
                      idx === 2 ? `${visibleStats[2]}` : 

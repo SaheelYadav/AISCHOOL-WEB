@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Target, Compass, Globe, Users, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 
 import AboutHero from "@/components/about/AboutHero";
-import Visionaries from "@/components/about/Visionaries";
 import OurStory from "@/components/about/OurStory";
 import LeadershipGrid from "@/components/about/LeadershipGrid";
 import IndustryPartnersGrid from "@/components/about/IndustryPartnersGrid";
@@ -25,8 +24,6 @@ export default function AboutUsPage() {
       {/* ================= SECTION 1 & 2: OUR STORY storytelling experience ================= */}
       <OurStory />
       
-      {/* ================= SECTION 3: INLINE REVEAL LEADERSHIP STORIES ================= */}
-      <Visionaries />
 
       {/* ================= SECTION 4: LEADERSHIP GRID ================= */}
       <LeadershipGrid />

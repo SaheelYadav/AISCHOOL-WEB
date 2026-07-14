@@ -17,7 +17,7 @@ export default function Footer() {
             <div className="flex items-center">
               <Link href="/" className="relative w-44 h-14 block hover:opacity-90 transition-opacity">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/logo-footer.png"
                   alt="The AI School Logo"
                   fill
                   sizes="176px"

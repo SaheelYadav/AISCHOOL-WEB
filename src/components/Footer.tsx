@@ -13,24 +13,24 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-8 pb-4">
           
           {/* Column 1: Brand Info & Social Network Array */}
-          <div className="md:col-span-4 space-y-4">
-            <div className="flex items-center">
-              <Link href="/" className="relative w-52 h-16 block hover:opacity-90 transition-opacity">
+          <div className="md:col-span-4 flex flex-col items-center sm:items-start text-center sm:text-left space-y-6">
+            <div className="flex items-center justify-center sm:justify-start w-full sm:-ml-4">
+              <Link href="/" className="relative w-[230px] h-[92px] block hover:opacity-90 transition-opacity">
                 <Image
                   src="/images/logo-footer.png"
                   alt="The AI School Logo"
                   fill
-                  sizes="208px"
+                  sizes="230px"
                   className="object-contain"
                   priority
                 />
               </Link>
             </div>
-            <p className="text-sm text-neutral-400 font-medium leading-relaxed max-w-xs">
+            <p className="text-sm text-neutral-400 font-medium leading-relaxed max-w-xs sm:pl-0.5">
               India’s only school where startup Leaders teach AI skills.
             </p>
             
-            <div className="flex items-center space-x-4 pt-2">
+            <div className="flex items-center justify-center sm:justify-start space-x-4 pt-1 w-full sm:pl-0.5">
               <a href="https://www.linkedin.com/company/theaischool/" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors" aria-label="LinkedIn">
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                   <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>

@@ -8,51 +8,58 @@ import {
   Users, 
   ChevronRight,
   Clock,
-  Laptop
+  Laptop,
+  GraduationCap
 } from "lucide-react";
 
-// Stat Cards Content
-const snapshotStats = [
+// Consolidated Bento Statistic Cards
+// Combines highlights (Hours, Mentors, Workshops, Prize Pool) & key metrics into a single layout
+const bentoStats = [
   {
-    value: "30+",
-    label: "Hours of Intense",
-    highlight: "Co-creation",
+    value: "3500+",
+    label: "Teams Registered",
+    desc: "National participation from leading universities and developer collectives.",
+    icon: Users,
+    sizeClass: "md:col-span-2 md:row-span-2 bg-gradient-to-br from-[#EE1C25] to-[#d61920] text-white border-red-500 shadow-lg"
+  },
+  {
+    value: "30+ Hrs",
+    label: "Co-creation Sprint",
     desc: "Non-stop brainstorm and code sprint to build working prototypes.",
     icon: Clock,
+    sizeClass: "md:col-span-1 md:row-span-1"
   },
   {
-    value: "10+",
-    label: "Mentoring & Speaker",
-    highlight: "Sessions",
-    desc: "Direct access to top developers, industry executives, and startup founders.",
-    icon: Users,
+    value: "113",
+    label: "Active Participants",
+    desc: "Vetted builders coding live.",
+    icon: GraduationCap,
+    sizeClass: "md:col-span-1 md:row-span-1"
   },
   {
-    value: "3",
-    label: "Comprehensive",
-    highlight: "Workshops",
-    desc: "Practical developer training in 5G & 6G telecom networks and GenAI.",
-    icon: Laptop,
+    value: "19",
+    label: "Finalists Shortlisted",
+    desc: "Pitched to the Grand Jury panel.",
+    icon: Trophy,
+    sizeClass: "md:col-span-1 md:row-span-1"
   },
   {
     value: "₹4.5L",
-    label: "Total Prize Pool",
-    highlight: "Cash Prizes",
-    desc: "Significant cash pool distributed across winners, runners-up, and top ideas.",
+    label: "Cash Prize Pool",
+    desc: "Distributed across winners, runners-up, and top innovative prototypes.",
     icon: Trophy,
+    sizeClass: "md:col-span-2 md:row-span-1"
+  },
+  {
+    value: "33+",
+    label: "Colleges Represented",
+    desc: "Pan-India institutional representation.",
+    icon: Laptop,
+    sizeClass: "md:col-span-1 md:row-span-1"
   }
 ];
 
-// Animated Statistics
-const statsData = [
-  { value: 19, label: "Finalists Shortlisted" },
-  { value: 3500, label: "Teams Registered", suffix: "+" },
-  { value: 113, label: "Active Participants" },
-  { value: 33, label: "Colleges Represented", suffix: "+" },
-  { value: 4.5, label: "Prize Pool (Lakhs)", suffix: "L" }
-];
-
-// Gallery Images (Curated 6 Images for Homepage Preview)
+// Curated 4 Images for a Tight Bento Gallery Grid (Reduces scroll height by ~40-50%)
 const galleryImages = [
   {
     src: "/images/hackathon_group1.jpg",
@@ -73,22 +80,17 @@ const galleryImages = [
     src: "/images/hackathon_pitch1.png",
     alt: "AI project pitch to judges panel",
     className: "md:col-span-1 md:row-span-1"
-  },
-  {
-    src: "/images/hackathon_group3.png",
-    alt: "Delegates and organizers group photo at hackathon summit",
-    className: "md:col-span-2 md:row-span-1"
   }
 ];
 
 export default function WorldsLargestAIHackathon() {
-  const [visibleStats, setVisibleStats] = useState<number[]>([0, 0, 0, 0, 0]);
+  const [visibleStats, setVisibleStats] = useState<number[]>([0, 0, 0, 0, 0, 0]);
   const statsSectionRef = useRef<HTMLDivElement>(null);
   const [hasAnimatedStats, setHasAnimatedStats] = useState(false);
 
-  // Intersection Observer for counting up statistics
   useEffect(() => {
     const currentRef = statsSectionRef.current;
+    const numericTargets = [3500, 30, 113, 19, 4.5, 33];
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
@@ -101,10 +103,8 @@ export default function WorldsLargestAIHackathon() {
 
           const timer = setInterval(() => {
             currentStep++;
-            const newStats = statsData.map((stat) => {
-              const target = stat.value;
-              const progress = currentStep / steps;
-              // Handle float values for decimal counter like 4.5L
+            const progress = currentStep / steps;
+            const newStats = numericTargets.map((target) => {
               if (target % 1 !== 0) {
                 return parseFloat((target * progress).toFixed(1));
               }
@@ -133,75 +133,99 @@ export default function WorldsLargestAIHackathon() {
   }, [hasAnimatedStats]);
 
   return (
-    <section className="w-full bg-white py-24 px-6 md:px-12 border-t border-gray-100 relative z-10 font-heading overflow-hidden">
+    <section className="w-full bg-white py-20 px-6 md:px-12 border-t border-gray-100 relative z-10 font-heading overflow-hidden select-none">
       {/* Light Radial Background Mesh Glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[radial-gradient(circle,rgba(238,28,37,0.02)_0%,transparent_70%)] pointer-events-none z-0" />
 
-      <div className="max-w-7xl mx-auto space-y-24 relative z-10">
+      <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         
-        {/* ================= SECTION 1: HERO ================= */}
-        <div className="text-center space-y-6 max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-red-50 border border-red-100 rounded-full">
+        {/* ================= SECTION 1: ONE CONSOLIDATED HERO ================= */}
+        <div className="text-center space-y-5 max-w-4xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-red-50 border border-red-100 rounded-full">
             <span className="w-2 h-2 rounded-full bg-[#EE1C25] animate-pulse" />
             <span className="text-[10px] font-black uppercase tracking-widest text-[#EE1C25]">
               National Hackathon Platform
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-gray-950 tracking-tight leading-tight uppercase">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-950 tracking-tight leading-tight uppercase">
             World&#39;s Largest <span className="text-[#EE1C25]">AI Hackathon</span>
           </h2>
 
-          <p className="text-base md:text-lg font-semibold text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm font-semibold text-slate-600 max-w-xl mx-auto leading-relaxed">
             India&#39;s premier AI innovation platform connecting students, developers, and industry leaders through live networks and collaborative engineering.
           </p>
         </div>
 
-        {/* ================= SECTION 2: HIGHLIGHTS SNAPSHOT ================= */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {snapshotStats.map((stat, idx) => {
+        {/* ================= SECTION 2: CONSOLIDATED BENTO STATS GRID ================= */}
+        <div 
+          ref={statsSectionRef}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
+        >
+          {bentoStats.map((stat, idx) => {
             const Icon = stat.icon;
+            const isHero = stat.sizeClass.includes("bg-[#EE1C25]");
             return (
               <div 
                 key={idx}
-                className="group bg-white border border-gray-200/80 rounded-3xl p-8 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between min-h-[220px]"
+                className={`group border rounded-3xl p-6 transition-all duration-300 flex flex-col justify-between min-h-[160px] ${
+                  isHero 
+                    ? stat.sizeClass 
+                    : "bg-gradient-to-br from-white to-slate-50 border-gray-100 hover:shadow-lg hover:-translate-y-1 hover:border-red-100 " + stat.sizeClass
+                }`}
               >
-                <div className="space-y-4">
-                  <div className="p-3 bg-red-50 text-[#EE1C25] border border-red-100 rounded-2xl w-fit group-hover:bg-[#EE1C25] group-hover:text-white transition-colors duration-300">
-                    <Icon className="w-6 h-6" />
+                <div className="space-y-3">
+                  <div className={`p-2.5 rounded-xl w-fit ${
+                    isHero ? "bg-white/10 text-white" : "bg-red-50 text-[#EE1C25] border border-red-100"
+                  }`}>
+                    <Icon className="w-4.5 h-4.5" />
                   </div>
                   <div>
-                    <span className="block text-sm font-extrabold text-neutral-500 uppercase tracking-wider">{stat.label}</span>
-                    <span className="block text-sm font-black text-gray-950 uppercase">{stat.highlight}</span>
+                    <span className={`block text-[10px] font-bold uppercase tracking-wider ${
+                      isHero ? "text-white/70" : "text-neutral-400"
+                    }`}>
+                      {stat.label}
+                    </span>
+                    <p className={`text-[11px] font-semibold mt-1 leading-normal ${
+                      isHero ? "text-white/80" : "text-neutral-500"
+                    }`}>
+                      {stat.desc}
+                    </p>
                   </div>
                 </div>
-                <div className="mt-4 pt-4 border-t border-gray-100">
-                  <span className="text-3xl font-black text-gray-950">{stat.value}</span>
-                  <p className="text-[11px] font-semibold text-neutral-400 leading-normal mt-1">{stat.desc}</p>
+                <div className="mt-4">
+                  <span className="text-3xl font-black tracking-tight leading-none">
+                    {idx === 0 ? `${visibleStats[0]}+` : 
+                     idx === 1 ? `${visibleStats[1]}+ Hrs` : 
+                     idx === 2 ? `${visibleStats[2]}` : 
+                     idx === 3 ? `${visibleStats[3]}` : 
+                     idx === 4 ? `₹${visibleStats[4]}L` : 
+                     `${visibleStats[5]}+`}
+                  </span>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* ================= SECTION 3: GALLERY PREVIEW ================= */}
-        <div className="space-y-12">
-          <div className="text-center space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#EE1C25]">
+        {/* ================= SECTION 3: TIGHT GALLERY GRID ================= */}
+        <div className="space-y-8">
+          <div className="text-center space-y-2">
+            <span className="text-[10px] font-black uppercase tracking-widest text-[#EE1C25]">
               Innovation in Action
             </span>
-            <h3 className="text-3xl font-black text-gray-950 uppercase">
+            <h3 className="text-2xl font-black text-gray-950 uppercase tracking-tight">
               Hackathon Gallery
             </h3>
           </div>
 
-          <div className="relative group/gallery">
+          <div className="relative group/gallery max-w-5xl mx-auto">
             <Link href="/hackathon#gallery">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[250px] cursor-pointer">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[160px] cursor-pointer">
                 {galleryImages.map((img, idx) => (
                   <div 
                     key={idx} 
-                    className={`relative overflow-hidden rounded-[2rem] border border-gray-200/80 group shadow-xs ${img.className}`}
+                    className={`relative overflow-hidden rounded-2xl border border-gray-150 group shadow-xs ${img.className}`}
                   >
                     <Image
                       src={img.src}
@@ -209,14 +233,13 @@ export default function WorldsLargestAIHackathon() {
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover group-hover:scale-102 transition-transform duration-500"
-                      priority={idx === 0}
                     />
                   </div>
                 ))}
               </div>
               {/* Premium Hover Blur Card Overlay */}
-              <div className="absolute inset-0 bg-white/10 backdrop-blur-xs flex items-center justify-center opacity-0 group-hover/gallery:opacity-100 transition-opacity duration-300 rounded-[2rem] z-20 pointer-events-none">
-                <div className="bg-white border border-gray-200 px-8 py-4 rounded-full shadow-lg text-sm font-black text-gray-950 uppercase tracking-widest flex items-center gap-2 transform translate-y-4 group-hover/gallery:translate-y-0 transition-transform duration-300">
+              <div className="absolute inset-0 bg-white/10 backdrop-blur-xs flex items-center justify-center opacity-0 group-hover/gallery:opacity-100 transition-opacity duration-300 rounded-2xl z-20 pointer-events-none">
+                <div className="bg-white border border-gray-200 px-6 py-3 rounded-full shadow-lg text-xs font-black text-gray-950 uppercase tracking-widest flex items-center gap-2 transform translate-y-3 group-hover/gallery:translate-y-0 transition-transform duration-300">
                   View Full Gallery <ChevronRight className="w-4 h-4 text-[#EE1C25]" />
                 </div>
               </div>
@@ -224,25 +247,8 @@ export default function WorldsLargestAIHackathon() {
           </div>
         </div>
 
-        {/* ================= SECTION 4: IMPACT STATISTICS & CTA ================= */}
-        <div 
-          ref={statsSectionRef}
-          className="bg-slate-50 border border-gray-100 rounded-[2.5rem] py-16 px-8 grid grid-cols-2 md:grid-cols-5 gap-8 text-center"
-        >
-          {statsData.map((stat, idx) => (
-            <div key={idx} className="space-y-2">
-              <span className="block text-4xl md:text-5xl font-black text-gray-950 tracking-tight font-heading">
-                {visibleStats[idx]}{stat.suffix || ""}
-              </span>
-              <span className="block text-xs font-bold text-neutral-500 uppercase tracking-wider leading-relaxed">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        {/* Explore CTA Button */}
-        <div className="text-center">
+        {/* ================= SECTION 4: ONE CLEAR CTA ================= */}
+        <div className="text-center pt-4 flex flex-col items-center gap-3">
           <Link
             href="/hackathon"
             className="group inline-flex items-center justify-center gap-3 bg-[#EE1C25] hover:bg-[#d61920] text-white font-bold text-xs uppercase tracking-widest px-10 py-4 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
@@ -250,6 +256,12 @@ export default function WorldsLargestAIHackathon() {
             Explore Full Hackathon Experience
             <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-neutral-50 border border-gray-100 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
+            <span className="text-[9px] font-black uppercase tracking-widest text-neutral-400">
+              Next Track Launching Soon
+            </span>
+          </div>
         </div>
 
       </div>

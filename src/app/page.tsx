@@ -7,6 +7,7 @@ import FlagshipLearningFrameworks from "@/components/home/FlagshipLearningFramew
 import EcosystemOrbit from "@/components/home/EcosystemOrbit";
 import GoogleReviews from "@/components/home/GoogleReviews";
 import AssessmentJourney from "@/components/home/AssessmentJourney";
+import CourseSnapshot from "@/components/home/CourseSnapshot";
 import WorldsLargestAIHackathon from "@/components/home/WorldsLargestAIHackathon";
 import RegistrationForm from "@/components/home/RegistrationForm";
 import Footer from "@/components/Footer";
@@ -35,7 +36,10 @@ export default function Home() {
       {/* 6. AI Readiness Assessment Journey */}
       <AssessmentJourney />
 
-      {/* 7. World's Largest AI Hackathon (Placeholder) */}
+      {/* 7. Course Snapshot */}
+      <CourseSnapshot illustration="/images/course-snapshot-hero.png" />
+
+      {/* 8. World's Largest AI Hackathon (Placeholder) */}
       <WorldsLargestAIHackathon />
 
       {/* 8. Trusted by Thousands of Learners (Google Reviews Carousel) */}

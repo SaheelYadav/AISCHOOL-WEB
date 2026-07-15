@@ -62,11 +62,11 @@ export default function HomeHero({
     <section
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full min-h-[45vh] bg-white text-[#171717] flex flex-col justify-between pt-3 pb-3 overflow-hidden border-b border-neutral-150/50 select-none z-10"
+      className="relative w-full min-h-[calc(100vh-76px)] bg-white text-[#171717] flex flex-col justify-center py-12 lg:py-20 overflow-hidden select-none z-10"
     >
       {/* 1. Engineering paper style background grid (0.5px lines, opacity 4%) */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
+        className="absolute inset-0 pointer-events-none opacity-[0.045] z-0"
         style={{
           backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.5) 0.5px, transparent 0.5px), linear-gradient(to bottom, rgba(0,0,0,0.5) 0.5px, transparent 0.5px)`,
           backgroundSize: "30px 30px",
@@ -74,7 +74,7 @@ export default function HomeHero({
       />
 
       {/* 2. Soft Red ambient radial glow centered behind content */}
-      <div className="absolute top-[35%] left-[75%] -translate-x-1/2 -translate-y-1/2 w-[65vw] h-[65vw] rounded-full bg-red-500/[0.018] blur-[140px] pointer-events-none z-0" />
+      <div className="absolute top-[50%] left-[75%] -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] rounded-full bg-red-500/[0.025] blur-[150px] pointer-events-none z-0" />
 
       {/* 3. Tiny floating red particles */}
       {mounted && !shouldReduceMotion && (
@@ -83,8 +83,8 @@ export default function HomeHero({
             <motion.div
               key={idx}
               animate={{
-                y: [0, -10, 0],
-                opacity: [0.08, 0.14, 0.08]
+                y: [0, -12, 0],
+                opacity: [0.08, 0.16, 0.08]
               }}
               transition={{
                 duration: 5 + idx * 1.5,
@@ -105,23 +105,20 @@ export default function HomeHero({
         </div>
       )}
 
-      {/* Hero Content Wrapper */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center flex-1">
+      {/* Hero Content Wrapper - 48% / 52% Composition on Desktop */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
 
-        {/* Left Side (45% on desktop layout) */}
-        <div className="lg:col-span-5 space-y-7 flex flex-col items-start text-left z-20">
-
-
+        {/* Left Side (48% on desktop) */}
+        <div className="w-full lg:w-[48%] space-y-7 flex flex-col items-start text-left z-20">
           {/* Heading */}
           <div className="space-y-4">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[42px] xl:text-[46px] font-black font-heading text-[#171717] tracking-tight leading-[1.12]">
+            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-[44px] xl:text-[50px] font-black font-heading text-[#171717] tracking-tight leading-[1.1]">
               {headlineContent}
             </h1>
             <p className="text-[#6B7280] font-heading font-extrabold text-xs sm:text-sm tracking-widest uppercase">
               {badgeText}
             </p>
           </div>
-
 
           {/* Action CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -142,57 +139,69 @@ export default function HomeHero({
           </div>
         </div>
 
-        {/* Right Side (55% on desktop - Premium 3D Infinity Logo Presentation) */}
-        <div className="lg:col-span-7 flex justify-center items-center relative w-full overflow-visible select-none">
+        {/* Right Side (52% on desktop - Premium 3D Infinity Logo Presentation) */}
+        <div className="w-full lg:w-[52%] flex justify-center items-center relative overflow-visible select-none">
           {mounted && (
-            <motion.div
-              style={{
-                x: coords.x,
-                y: coords.y,
-              }}
-              animate={{
-                y: shouldReduceMotion ? 0 : [0, -6, 0],
-                scale: shouldReduceMotion ? 1 : [1, 1.02, 1],
-              }}
-              transition={{
-                y: {
-                  duration: 4.5,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "easeInOut",
-                },
-                scale: {
-                  duration: 6.0,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "easeInOut",
-                }
-              }}
-              className="relative w-full max-w-[340px] sm:max-w-[440px] lg:max-w-[500px] aspect-[3/2] flex items-center justify-center"
-            >
-              {/* Soft radial red glow behind the logo */}
-              <div
-                className="absolute inset-[-12%] pointer-events-none"
+            <div className="relative w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[540px] aspect-[4/3] flex items-center justify-center">
+              {/* Diffused white ambient glow to block grid lines and create a clean surface for the logo */}
+              <div 
+                className="absolute w-[80%] h-[75%] bg-white rounded-full blur-2xl pointer-events-none z-0"
                 style={{
-                  background:
-                    "radial-gradient(circle at center, rgba(238,28,37,0.08) 0%, rgba(238,28,37,0.02) 45%, transparent 70%)",
+                  boxShadow: "0 0 80px 60px #ffffff"
                 }}
               />
 
-              {/* 3D Infinity Logo Image */}
-              <Image
-                src="/assets/image2.png"
-                alt="The AI School 3D Infinity Logo"
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 500px"
-                className="object-contain pointer-events-none select-none mix-blend-multiply [mask-image:radial-gradient(ellipse_at_center,black_60%,rgba(0,0,0,0.9)_80%,transparent_100%)]"
+              {/* Soft radial red glow behind the logo */}
+              <div
+                className="absolute inset-[-15%] pointer-events-none z-10"
+                style={{
+                  background:
+                    "radial-gradient(circle at center, rgba(238,28,37,0.07) 0%, rgba(238,28,37,0.015) 55%, transparent 75%)",
+                }}
               />
-            </motion.div>
+
+              {/* Diffused shadows underneath the platform */}
+              <div className="absolute bottom-[10%] w-[70%] h-8 bg-black/[0.02] rounded-full blur-xl pointer-events-none z-10" />
+
+              <motion.div
+                style={{
+                  x: coords.x,
+                  y: coords.y,
+                }}
+                animate={{
+                  y: shouldReduceMotion ? 0 : [0, -8, 0],
+                  scale: shouldReduceMotion ? 1 : [1, 1.02, 1],
+                }}
+                transition={{
+                  y: {
+                    duration: 5.0,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    ease: "easeInOut",
+                  },
+                  scale: {
+                    duration: 7.0,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    ease: "easeInOut",
+                  }
+                }}
+                className="relative w-full h-full flex items-center justify-center z-20"
+              >
+                {/* 3D Infinity Logo Image with radial mask-image to fade edges perfectly */}
+                <Image
+                  src="/assets/image2.png"
+                  alt="The AI School 3D Infinity Logo"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 540px"
+                  className="object-contain pointer-events-none select-none mix-blend-multiply [mask-image:radial-gradient(circle_at_center,black_50%,rgba(0,0,0,0.85)_75%,transparent_98%)]"
+                />
+              </motion.div>
+            </div>
           )}
         </div>
       </div>
-
     </section>
   );
 }

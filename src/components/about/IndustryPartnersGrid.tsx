@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 export default function IndustryPartnersGrid() {
   const partners = [
@@ -9,30 +10,35 @@ export default function IndustryPartnersGrid() {
       title: "Founder",
       company: "ResidualHue",
       initials: "AC",
+      image: "/mentors/arun.webp",
     },
     {
       name: "Gopi Krishna",
       title: "Founder & CEO",
       company: "hyperleap.ai",
       initials: "GK",
+      image: "/mentors/gopi.webp",
     },
     {
       name: "Kiran Babu",
       title: "Co-Founder and CEO",
       company: "rava.ai",
       initials: "KB",
+      image: "/mentors/kiran.webp",
     },
     {
       name: "Raja Mamidi",
       title: "Co-Founder",
       company: "DotCheckout",
       initials: "RM",
+      image: "/mentors/raja.webp",
     },
     {
       name: "Ranjan Relan",
       title: "Founder/CEO",
       company: "AgentAnalytics.AI",
       initials: "RR",
+      image: "/mentors/ranjan.webp",
     },
   ];
 
@@ -57,9 +63,19 @@ export default function IndustryPartnersGrid() {
               key={idx}
               className="bg-gradient-to-br from-white to-slate-50 border border-gray-100 rounded-2xl p-5 flex flex-col items-center text-center shadow-xs hover:-translate-y-1 hover:shadow-md transition-all duration-300"
             >
-              {/* Smaller Avatar: 96px */}
-              <div className="w-20 h-20 rounded-full bg-slate-200 text-slate-600 font-extrabold text-2xl flex items-center justify-center mb-4 border border-slate-300/40 select-none">
-                {partner.initials}
+              {/* Avatar: 80px circular with real photo */}
+              <div className="w-20 h-20 rounded-full bg-slate-200 text-slate-600 font-extrabold text-2xl flex items-center justify-center mb-4 border border-slate-300/40 overflow-hidden relative shrink-0">
+                {partner.image ? (
+                  <Image
+                    src={partner.image}
+                    alt={partner.name}
+                    fill
+                    sizes="80px"
+                    className="object-cover"
+                  />
+                ) : (
+                  partner.initials
+                )}
               </div>
 
               <div className="space-y-1">

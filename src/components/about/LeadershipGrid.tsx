@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 export default function LeadershipGrid() {
   const leadership = [
@@ -8,24 +9,28 @@ export default function LeadershipGrid() {
       name: "Susanta Srinath Reddy",
       title: "Founder/CEO",
       initials: "SR",
+      image: "/mentors/srinath.webp",
       linkedin: "https://www.linkedin.com/in/susanta-srinath-reddy-57a9776b/",
     },
     {
       name: "K. Spandana",
       title: "Co-Founder",
       initials: "KS",
+      image: "/mentors/spandana.webp",
       linkedin: "https://www.linkedin.com/company/theaischool/",
     },
     {
       name: "Manaswini Reddy",
       title: "Head of Strategic Alliances",
       initials: "MR",
+      image: "/mentors/manaswini.webp",
       linkedin: "https://www.linkedin.com/company/theaischool/",
     },
     {
       name: "Rupak Thummalaeddy",
       title: "Strategic Advisor",
       initials: "RT",
+      image: "/mentors/rupak.webp",
       linkedin: "https://www.linkedin.com/company/theaischool/",
     },
   ];
@@ -51,9 +56,19 @@ export default function LeadershipGrid() {
               key={idx}
               className="bg-gradient-to-br from-white to-slate-50 border border-gray-100 rounded-2xl p-6 flex flex-col items-center text-center shadow-xs hover:-translate-y-1 hover:shadow-md transition-all duration-300 relative group"
             >
-              {/* Larger Avatar: 120px */}
-              <div className="w-28 h-28 rounded-full bg-slate-200 text-slate-600 font-extrabold text-3xl flex items-center justify-center mb-4 border border-slate-300/40 select-none">
-                {member.initials}
+              {/* Avatar: 112px circular with real photo */}
+              <div className="w-28 h-28 rounded-full bg-slate-200 text-slate-600 font-extrabold text-3xl flex items-center justify-center mb-4 border border-slate-300/40 overflow-hidden relative shrink-0">
+                {member.image ? (
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    sizes="112px"
+                    className="object-cover"
+                  />
+                ) : (
+                  member.initials
+                )}
               </div>
 
               <div className="space-y-1">
@@ -65,7 +80,7 @@ export default function LeadershipGrid() {
                 </p>
               </div>
 
-              {/* LinkedIn hover overlay icon */}
+              {/* LinkedIn icon */}
               <a 
                 href={member.linkedin}
                 target="_blank"

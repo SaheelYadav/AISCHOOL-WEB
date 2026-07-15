@@ -1,13 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
-  --font-heading: 'Outfit', sans-serif;
+  --font-sans: Helvetica, "Helvetica Neue", Arial, sans-serif;
+  --font-heading: Helvetica, "Helvetica Neue", Arial, sans-serif;
   --color-primary: #EE1C25;
   --color-primary-hover: #D3131B;
   --color-text-dark: #171717;
   --color-text-muted: #6B7280;
+}
+
+html,
+body {
+  font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
 }
 
 /* 3D and Animation Utilities */

@@ -15,81 +15,93 @@ import {
 // Consolidated Bento Statistic Cards with Premium Color Themes
 const bentoStats = [
   {
+    value: 3500,
     label: "Teams Registered",
     desc: "National participation from leading universities.",
     icon: Users,
     theme: {
-      bg: "from-red-500/[0.03] to-red-600/[0.01]",
-      border: "border-red-100 group-hover:border-red-300",
+      accent: "#EE1C25",
+      bg: "from-red-500/[0.04] to-red-600/[0.01]",
+      border: "border-red-100/80 hover:border-red-300",
       iconBg: "bg-red-50 text-[#EE1C25]",
-      glow: "group-hover:shadow-[0_20px_40px_-15px_rgba(238,28,37,0.15)]",
+      glow: "hover:shadow-[0_24px_48px_-16px_rgba(238,28,37,0.18)]",
       suffix: "+"
     }
   },
   {
+    value: 30,
     label: "Co-creation Sprint",
     desc: "Non-stop brainstorm and code sprint to build working prototypes.",
     icon: Clock,
     theme: {
-      bg: "from-orange-500/[0.03] to-orange-600/[0.01]",
-      border: "border-orange-100 group-hover:border-orange-300",
+      accent: "#F97316",
+      bg: "from-orange-500/[0.04] to-orange-600/[0.01]",
+      border: "border-orange-100/80 hover:border-orange-300",
       iconBg: "bg-orange-50 text-orange-500",
-      glow: "group-hover:shadow-[0_20px_40px_-15px_rgba(249,115,22,0.15)]",
+      glow: "hover:shadow-[0_24px_48px_-16px_rgba(249,115,22,0.18)]",
       suffix: "+ Hrs"
     }
   },
   {
+    value: 113,
     label: "Active Participants",
     desc: "Vetted builders coding live.",
     icon: Users,
     theme: {
-      bg: "from-blue-500/[0.03] to-blue-600/[0.01]",
-      border: "border-blue-100 group-hover:border-blue-300",
+      accent: "#3B82F6",
+      bg: "from-blue-500/[0.04] to-blue-600/[0.01]",
+      border: "border-blue-100/80 hover:border-blue-300",
       iconBg: "bg-blue-50 text-blue-500",
-      glow: "group-hover:shadow-[0_20px_40px_-15px_rgba(59,130,246,0.15)]",
+      glow: "hover:shadow-[0_24px_48px_-16px_rgba(59,130,246,0.18)]",
       suffix: ""
     }
   },
   {
+    value: 19,
     label: "Finalists Shortlisted",
     desc: "Pitched to the Grand Jury panel.",
     icon: Trophy,
     theme: {
-      bg: "from-purple-500/[0.03] to-purple-600/[0.01]",
-      border: "border-purple-100 group-hover:border-purple-300",
+      accent: "#A855F7",
+      bg: "from-purple-500/[0.04] to-purple-600/[0.01]",
+      border: "border-purple-100/80 hover:border-purple-300",
       iconBg: "bg-purple-50 text-purple-500",
-      glow: "group-hover:shadow-[0_20px_40px_-15px_rgba(168,85,247,0.15)]",
+      glow: "hover:shadow-[0_24px_48px_-16px_rgba(168,85,247,0.18)]",
       suffix: ""
     }
   },
   {
+    value: 4.5,
     label: "Cash Prize Pool",
     desc: "Distributed across winners and innovative prototypes.",
     icon: Trophy,
     theme: {
-      bg: "from-yellow-500/[0.03] to-yellow-600/[0.01]",
-      border: "border-yellow-100 group-hover:border-yellow-300",
+      accent: "#EAB308",
+      bg: "from-yellow-500/[0.04] to-yellow-600/[0.01]",
+      border: "border-yellow-100/80 hover:border-yellow-300",
       iconBg: "bg-yellow-50 text-yellow-600",
-      glow: "group-hover:shadow-[0_20px_40px_-15px_rgba(234,179,8,0.15)]",
+      glow: "hover:shadow-[0_24px_48px_-16px_rgba(234,179,8,0.18)]",
       prefix: "₹",
       suffix: "L"
     }
   },
   {
+    value: 33,
     label: "Colleges Represented",
     desc: "Pan-India institutional representation.",
     icon: Laptop,
     theme: {
-      bg: "from-emerald-500/[0.03] to-emerald-600/[0.01]",
-      border: "border-emerald-100 group-hover:border-emerald-300",
+      accent: "#10B981",
+      bg: "from-emerald-500/[0.04] to-emerald-600/[0.01]",
+      border: "border-emerald-100/80 hover:border-emerald-300",
       iconBg: "bg-emerald-50 text-emerald-500",
-      glow: "group-hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.15)]",
+      glow: "hover:shadow-[0_24px_48px_-16px_rgba(16,185,129,0.18)]",
       suffix: "+"
     }
   }
 ];
 
-// Curated 8 Images for a Seamless Premium Gallery Grid (2 Large, 4 Medium, 2 Small)
+// Curated 8 Images for a Seamless Premium Gallery Grid (2 Large, 2 Medium, 4 Small)
 const galleryImages = [
   {
     src: "/images/hackathon_group1.jpg",
@@ -116,6 +128,12 @@ const galleryImages = [
     objectPosition: "object-center"
   },
   {
+    src: "/images/hackathon_felicitation1.png",
+    alt: "Founder Receiving Recognition Award",
+    className: "md:col-span-2 md:row-span-2",
+    objectPosition: "object-[center_20%]"
+  },
+  {
     src: "/images/hackathon_group3.png",
     alt: "Delegates and organizers group photo at hackathon summit",
     className: "md:col-span-2 md:row-span-1",
@@ -132,12 +150,6 @@ const galleryImages = [
     alt: "Mentors guiding teams on network protocols",
     className: "md:col-span-1 md:row-span-1",
     objectPosition: "object-center"
-  },
-  {
-    src: "/images/hackathon_felicitation1.png",
-    alt: "Founder Receiving Recognition Award",
-    className: "md:col-span-2 md:row-span-1",
-    objectPosition: "object-top" // Prevents the founder's face from being cut off
   }
 ];
 
@@ -148,7 +160,7 @@ export default function WorldsLargestAIHackathon() {
 
   useEffect(() => {
     const currentRef = statsSectionRef.current;
-    const numericTargets = [3500, 30, 113, 19, 4.5, 33];
+    const numericTargets = bentoStats.map((s) => s.value);
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
@@ -162,11 +174,13 @@ export default function WorldsLargestAIHackathon() {
           const timer = setInterval(() => {
             currentStep++;
             const progress = currentStep / steps;
+            // Ease-out for smoother deceleration
+            const eased = 1 - Math.pow(1 - progress, 3);
             const newStats = numericTargets.map((target) => {
               if (target % 1 !== 0) {
-                return parseFloat((target * progress).toFixed(1));
+                return parseFloat((target * eased).toFixed(1));
               }
-              return Math.min(Math.round(target * progress), target);
+              return Math.min(Math.round(target * eased), target);
             });
             setVisibleStats(newStats);
 
@@ -191,7 +205,7 @@ export default function WorldsLargestAIHackathon() {
   }, [hasAnimatedStats]);
 
   return (
-    <section className="w-full bg-white py-28 lg:py-36 px-6 md:px-12 border-t border-gray-100 relative z-10 font-heading overflow-hidden select-none">
+    <section className="w-full bg-white py-28 lg:py-36 px-6 md:px-12 relative z-10 font-heading overflow-hidden select-none">
       {/* Light Radial Background Mesh Glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[radial-gradient(circle,rgba(238,28,37,0.02)_0%,transparent_70%)] pointer-events-none z-0" />
 
@@ -215,10 +229,10 @@ export default function WorldsLargestAIHackathon() {
           </p>
         </div>
 
-        {/* ================= SECTION 2: CONSOLIDATED SINGLE-ROW STATS GRID ================= */}
+        {/* ================= SECTION 2: PREMIUM METRIC CARDS ================= */}
         <div 
           ref={statsSectionRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6"
+          className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-5"
         >
           {bentoStats.map((stat, idx) => {
             const Icon = stat.icon;
@@ -232,34 +246,35 @@ export default function WorldsLargestAIHackathon() {
             return (
               <div 
                 key={idx}
-                className={`group relative bg-gradient-to-br ${t.bg} border ${t.border} rounded-2xl p-6 flex flex-col justify-between min-h-[220px] transition-all duration-350 ${t.glow} hover:-translate-y-1 overflow-hidden`}
+                className={`group relative bg-gradient-to-br ${t.bg} border ${t.border} rounded-2xl p-5 flex flex-col justify-between min-h-[200px] transition-all duration-300 ${t.glow} hover:-translate-y-1.5 overflow-hidden`}
               >
+                {/* Accent top-bar gradient */}
+                <div 
+                  className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: `linear-gradient(90deg, ${t.accent}, transparent)` }}
+                />
+
                 {/* Decorative background grid pattern inside card */}
                 <div 
-                  className="absolute inset-0 opacity-[0.015] pointer-events-none" 
+                  className="absolute inset-0 opacity-[0.012] pointer-events-none" 
                   style={{
                     backgroundImage: `linear-gradient(to right, gray 1px, transparent 1px), linear-gradient(to bottom, gray 1px, transparent 1px)`,
                     backgroundSize: '15px 15px'
                   }}
                 />
                 
-                <div className="space-y-4 relative z-10">
-                  <div className={`p-3 rounded-full w-fit ${t.iconBg} shadow-sm transition-transform duration-350 group-hover:scale-110`}>
-                    <Icon className="w-5 h-5" />
+                <div className="space-y-3 relative z-10">
+                  <div className={`p-2.5 rounded-xl w-fit ${t.iconBg} shadow-sm transition-transform duration-300 group-hover:scale-110`}>
+                    <Icon className="w-4.5 h-4.5" />
                   </div>
                   
-                  <div>
-                    <h4 className="text-sm font-black text-gray-950 uppercase tracking-wide">
-                      {stat.label}
-                    </h4>
-                    <p className="text-xs font-semibold text-neutral-500 mt-1.5 leading-relaxed">
-                      {stat.desc}
-                    </p>
-                  </div>
+                  <h4 className="text-[11px] font-black text-gray-600 uppercase tracking-wider leading-tight">
+                    {stat.label}
+                  </h4>
                 </div>
 
-                <div className="mt-6 relative z-10">
-                  <span className="text-3xl lg:text-4xl font-black tracking-tight text-gray-950 block">
+                <div className="relative z-10 mt-auto pt-3">
+                  <span className="text-3xl md:text-4xl lg:text-[2.75rem] font-black tracking-tight text-gray-950 block leading-none">
                     {displayVal}
                   </span>
                 </div>
@@ -281,18 +296,18 @@ export default function WorldsLargestAIHackathon() {
 
           <div className="relative group/gallery max-w-5xl mx-auto">
             <Link href="/hackathon#gallery">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[160px] cursor-pointer">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-3 auto-rows-[160px] cursor-pointer">
                 {galleryImages.map((img, idx) => (
                   <div 
                     key={idx} 
-                    className={`relative overflow-hidden rounded-2xl border border-gray-150 group shadow-xs ${img.className}`}
+                    className={`relative overflow-hidden rounded-2xl group shadow-sm hover:shadow-md transition-shadow duration-300 ${img.className}`}
                   >
                     <Image
                       src={img.src}
                       alt={img.alt}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      className={`object-cover ${img.objectPosition} group-hover:scale-102 transition-transform duration-500`}
+                      className={`object-cover ${img.objectPosition} group-hover:scale-[1.03] transition-transform duration-500`}
                     />
                   </div>
                 ))}

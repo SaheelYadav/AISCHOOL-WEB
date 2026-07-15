@@ -66,17 +66,14 @@ function LogoColumn({ items, direction, speedClass }: LogoColumnProps) {
         {duplicatedItems.map((partner, idx) => (
           <div
             key={`${partner.name}-${idx}`}
-            className="flex flex-col items-center justify-center bg-white border border-neutral-100 rounded-2xl p-4 h-24 shadow-xs"
+            className="flex items-center justify-center bg-white border border-neutral-100 rounded-2xl p-4 h-20 shadow-xs"
           >
             <img
               src={partner.logo}
               alt={`${partner.name} logo`}
-              className="max-h-8 max-w-[85%] object-contain"
+              className="max-h-10 max-w-[85%] object-contain"
               onError={(e) => { (e.target as HTMLElement).style.display = "none"; }}
             />
-            <span className="text-[8px] font-bold tracking-wider text-neutral-400 font-sans uppercase text-center truncate w-full mt-2">
-              {partner.name === "Bharat Dynamics Limited" ? "BDL" : partner.name}
-            </span>
           </div>
         ))}
       </div>
@@ -112,7 +109,7 @@ export default function PartnersSection({
   });
 
   return (
-    <section className="w-full bg-white py-28 lg:py-36 px-6 md:px-12 relative border-t border-gray-100 z-10 font-heading">
+    <section className="w-full bg-white py-28 lg:py-36 px-6 md:px-12 relative z-10 font-heading">
       <div className="max-w-7xl mx-auto space-y-16">
 
         {/* ================= SECTION 1: PROGRAM PARTNERS ================= */}
@@ -143,19 +140,16 @@ export default function PartnersSection({
                 {programPartners.map((partner) => (
                   <div
                     key={partner.name}
-                    className="group bg-white border border-neutral-200/80 rounded-2xl p-6 flex flex-col items-center justify-center h-40 shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-[#EF232A] transition-all duration-300"
+                    className="group bg-white border border-neutral-200/80 rounded-2xl p-6 flex flex-col items-center justify-center h-28 shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-[#EF232A] transition-all duration-300"
                   >
-                    <div className="flex-1 flex items-center justify-center w-full">
+                    <div className="flex items-center justify-center w-full h-full">
                       <img
                         src={partner.logo}
                         alt={`${partner.name} logo`}
-                        className="max-h-12 max-w-[85%] object-contain"
+                        className="max-h-11 max-w-[90%] object-contain"
                         onError={(e) => { (e.target as HTMLElement).style.display = "none"; }}
                       />
                     </div>
-                    <span className="text-xs font-black tracking-wider text-neutral-500 font-sans uppercase mt-4 text-center">
-                      {partner.name === "Department of Science & Technology" ? "DST" : partner.name}
-                    </span>
                   </div>
                 ))}
               </div>

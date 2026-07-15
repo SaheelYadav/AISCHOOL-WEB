@@ -80,6 +80,12 @@ const galleryImages = [
     objectPosition: "object-center"
   },
   {
+    src: "/images/hackathon_felicitation1.png",
+    alt: "Founder Receiving Recognition Award",
+    className: "md:col-span-2 md:row-span-2", // Increased height to prevent vertical face cropping and reduce scaling blur
+    objectPosition: "object-center"
+  },
+  {
     src: "/images/hackathon_group3.png",
     alt: "Delegates and organizers group photo at hackathon summit",
     className: "md:col-span-2 md:row-span-1",
@@ -96,12 +102,6 @@ const galleryImages = [
     alt: "Mentors guiding teams on network protocols",
     className: "md:col-span-1 md:row-span-1",
     objectPosition: "object-center"
-  },
-  {
-    src: "/images/hackathon_felicitation1.png",
-    alt: "Founder Receiving Recognition Award",
-    className: "md:col-span-2 md:row-span-1",
-    objectPosition: "object-top" // Ensures the founder is not cut off
   }
 ];
 

@@ -94,7 +94,7 @@ export default function AboutHero() {
     <section
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full min-h-screen bg-[#FCFCFD] text-slate-900 flex items-center justify-center py-28 md:py-36 lg:py-40 overflow-hidden border-b border-[#ECECEC]"
+      className="relative w-full min-h-screen bg-[#FCFCFD] text-slate-900 flex items-center justify-center pt-8 md:pt-12 lg:pt-16 pb-24 md:pb-32 lg:pb-36 overflow-visible border-b border-[#ECECEC]"
     >
       {/* Noise */}
       <div
@@ -105,7 +105,7 @@ export default function AboutHero() {
       />
 
       {/* Ambient */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-clip pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
@@ -151,7 +151,7 @@ export default function AboutHero() {
           <div className="space-y-4">
             <motion.h1
               variants={itemVariants}
-              className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-tight bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#64748B] bg-clip-text text-transparent"
+              className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.0] tracking-tight bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#64748B] bg-clip-text text-transparent pb-1"
             >
               Building India&apos;s Next
               <br />

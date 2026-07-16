@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 export default function TeamPreview() {
   const founders = [
     {
-      name: "Susanta Srinath Reddy",
+      name: "Ganta Srinath Reddy",
       role: "Founder/CEO",
       initials: "SR",
       image: "/mentors/srinath.webp",

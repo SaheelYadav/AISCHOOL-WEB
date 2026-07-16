@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function LeadershipGrid() {
   const leadership = [
     {
-      name: "Susanta Srinath Reddy",
+      name: "Ganta Srinath Reddy",
       title: "Founder/CEO",
       initials: "SR",
       image: "/mentors/srinath.webp",

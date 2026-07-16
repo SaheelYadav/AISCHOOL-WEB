@@ -2,8 +2,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, Mail, Phone, MapPin, Building2, Send, Briefcase, Sparkles, GraduationCap, ArrowRight } from 'lucide-react';
+import { useRegion } from '@/context/RegionContext';
 
 export default function UnifiedRegistrationForm() {
+  const { regionConfig } = useRegion();
   // 'student' = wants to buy a course | 'candidate' = wants to apply for a job
   const [intent, setIntent] = useState<'student' | 'candidate'>('student');
   const [isLoading, setIsLoading] = useState(false);
@@ -41,8 +43,12 @@ export default function UnifiedRegistrationForm() {
             email,
             phone,
             college: organization,
-            year: '2024', // Default year, could be added as a field
+            year: '2024', // Default year
             courseSlug,
+            region: regionConfig.code,
+            country: regionConfig.country,
+            currency: regionConfig.currency,
+            timezone: regionConfig.timezone,
           }),
         });
         

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { ChevronDown, ChevronRight, Menu, X } from "lucide-react";
+import { useRegion } from "@/context/RegionContext";
+import { REGIONS } from "@/config/regions";
 
 interface Course {
   name: string;
@@ -96,10 +98,20 @@ const CATEGORIES: Category[] = [
 ];
 
 export default function Header() {
+  const { currentRegion, regionConfig, setRegion } = useRegion();
   const [activeCategory, setActiveCategory] = useState("ai-internship");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const activeCourses = CATEGORIES.find((c) => c.id === activeCategory)?.courses || [];
+
+  const handleRegionChange = (code: string) => {
+    document.cookie = `preferred_region=${code}; path=/; max-age=31536000; SameSite=Lax`;
+    setRegion(code);
+    const targetRegion = REGIONS[code];
+    if (targetRegion) {
+      window.location.href = targetRegion.path;
+    }
+  };
 
   return (
     <>
@@ -137,8 +149,14 @@ export default function Header() {
             </a>
           </div>
           {/* Announcement text */}
-          <span className="text-center flex-1">India's only school where startup Leaders teach AI skills.</span>
-          <div className="hidden sm:block w-[100px] text-right"></div>
+          <span className="text-center flex-1">
+            {regionConfig.code === "in" 
+              ? "India's only school where startup Leaders teach AI skills."
+              : `${regionConfig.name}'s only school where startup Leaders teach AI skills.`}
+          </span>
+          <div className="hidden sm:block text-right">
+            <a href={`tel:${regionConfig.phone}`} className="hover:underline">{regionConfig.phone}</a>
+          </div>
         </div>
       </div>
 
@@ -146,9 +164,9 @@ export default function Header() {
       <header className="sticky top-0 w-full bg-white/95 backdrop-blur-md border-b border-black/5 z-[999]">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-8 py-5 relative">
           {/* Logo */}
-          <a href="/" className="flex items-center">
+          <a href={regionConfig.path} className="flex items-center">
             <img 
-              src="/assets/logo.png" 
+              src={regionConfig.assets.logo} 
               alt="The AI School Logo" 
               className="h-11 w-auto select-none"
             />
@@ -202,21 +220,16 @@ export default function Header() {
                   </div>
                 </div>
               </li>
-              <li>
-                <a href="/about-us" className="px-3 py-2 text-sm font-bold text-[#171717] hover:text-[#EE1C25] transition-colors">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="/blogs" className="px-3 py-2 text-sm font-bold text-[#171717] hover:text-[#EE1C25] transition-colors">
-                  Blogs
-                </a>
-              </li>
-              <li>
-                <a href="/contact-us" className="px-3 py-2 text-sm font-bold text-[#171717] hover:text-[#EE1C25] transition-colors">
-                  Contact Us
-                </a>
-              </li>
+              {regionConfig.navigation.map((nav, idx) => {
+                if (nav.url === "/learn") return null; // Already rendered with mega menu
+                return (
+                  <li key={idx}>
+                    <a href={nav.url} className="px-3 py-2 text-sm font-bold text-[#171717] hover:text-[#EE1C25] transition-colors">
+                      {nav.name}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
@@ -231,15 +244,24 @@ export default function Header() {
 
             <div className="flex items-center gap-2">
               <img
+                src="https://flagcdn.com/w40/in.png"
+                alt="India Flag"
+                onClick={() => handleRegionChange("in")}
+                className={`w-7 rounded-sm shadow-sm hover:scale-105 cursor-pointer transition-transform ${currentRegion === "in" ? "ring-2 ring-[#EE1C25]" : "opacity-60"}`}
+                title="India"
+              />
+              <img
                 src="https://flagcdn.com/w40/us.png"
                 alt="USA Flag"
-                className="w-7 rounded-sm shadow-sm hover:scale-105 cursor-pointer transition-transform"
+                onClick={() => handleRegionChange("us")}
+                className={`w-7 rounded-sm shadow-sm hover:scale-105 cursor-pointer transition-transform ${currentRegion === "us" ? "ring-2 ring-[#EE1C25]" : "opacity-60"}`}
                 title="United States"
               />
               <img
                 src="https://flagcdn.com/w40/ph.png"
                 alt="Philippines Flag"
-                className="w-7 rounded-sm shadow-sm hover:scale-105 cursor-pointer transition-transform"
+                onClick={() => handleRegionChange("ph")}
+                className={`w-7 rounded-sm shadow-sm hover:scale-105 cursor-pointer transition-transform ${currentRegion === "ph" ? "ring-2 ring-[#EE1C25]" : "opacity-60"}`}
                 title="Philippines"
               />
             </div>

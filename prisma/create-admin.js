@@ -12,8 +12,8 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  const email = 'admin@theaischool.com';
-  const password = 'admin123';
+  const email = 'saheelyadav67@gmail.com';
+  const password = 'Vu18Nj2x7';
 
   console.log(`Checking if admin user ${email} already exists...`);
   const existingAdmin = await prisma.adminUser.findUnique({

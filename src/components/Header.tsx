@@ -156,7 +156,7 @@ export default function Header() {
               : `${regionConfig.name}'s only school where startup Leaders teach AI skills.`}
           </span>
           <div className="hidden sm:block text-right">
-            <a href={`tel:${regionConfig.phone}`} className="hover:underline">{regionConfig.phone}</a>
+            {/* Phone number removed from top banner per request */}
           </div>
         </div>
       </div>
@@ -239,31 +239,31 @@ export default function Header() {
             {/* Desktop Action Buttons */}
 
             <div className="flex items-center gap-2">
-              {getSupportedRegions().includes("in") && (
-                <img
-                  src="https://flagcdn.com/w40/in.png"
-                  alt="India Flag"
-                  onClick={() => handleRegionChange("in")}
-                  className={`w-7 rounded-sm shadow-sm hover:scale-105 cursor-pointer transition-transform ${currentRegion === "in" ? "ring-2 ring-[#EE1C25]" : "opacity-60"}`}
-                  title="India"
-                />
-              )}
-              {getSupportedRegions().includes("us") && (
+              {getSupportedRegions().includes("us") && currentRegion !== "us" && (
                 <img
                   src="https://flagcdn.com/w40/us.png"
                   alt="USA Flag"
                   onClick={() => handleRegionChange("us")}
-                  className={`w-7 rounded-sm shadow-sm hover:scale-105 cursor-pointer transition-transform ${currentRegion === "us" ? "ring-2 ring-[#EE1C25]" : "opacity-60"}`}
+                  className="w-7 rounded-sm shadow-sm hover:scale-105 cursor-pointer transition-transform opacity-80 hover:opacity-100"
                   title="United States"
                 />
               )}
-              {getSupportedRegions().includes("ph") && (
+              {getSupportedRegions().includes("ph") && currentRegion !== "ph" && (
                 <img
                   src="https://flagcdn.com/w40/ph.png"
                   alt="Philippines Flag"
                   onClick={() => handleRegionChange("ph")}
-                  className={`w-7 rounded-sm shadow-sm hover:scale-105 cursor-pointer transition-transform ${currentRegion === "ph" ? "ring-2 ring-[#EE1C25]" : "opacity-60"}`}
+                  className="w-7 rounded-sm shadow-sm hover:scale-105 cursor-pointer transition-transform opacity-80 hover:opacity-100"
                   title="Philippines"
+                />
+              )}
+              {currentRegion !== "in" && (
+                <img
+                  src="https://flagcdn.com/w40/in.png"
+                  alt="India Flag"
+                  onClick={() => handleRegionChange("in")}
+                  className="w-7 rounded-sm shadow-sm hover:scale-105 cursor-pointer transition-transform opacity-80 hover:opacity-100"
+                  title="India"
                 />
               )}
             </div>

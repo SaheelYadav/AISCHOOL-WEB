@@ -214,7 +214,7 @@ export default function DedicatedHackathonPage() {
       <HackathonTimeline />
 
       {/* ================= STATISTICS & OUTCOMES ================= */}
-      <section ref={statsSectionRef} className="w-full bg-white py-20 px-6 md:px-12 font-heading">
+      <section ref={statsSectionRef} className="w-full bg-white py-14 px-6 md:px-12 font-heading">
         <div className="max-w-7xl mx-auto bg-slate-50 border border-gray-100 rounded-[2.5rem] py-16 px-8 grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
           {statsData.map((stat, idx) => (
             <div key={idx} className="space-y-2">
@@ -230,7 +230,7 @@ export default function DedicatedHackathonPage() {
       </section>
 
       {/* ================= FULL GALLERY ================= */}
-      <section id="gallery" className="w-full bg-white py-20 px-6 md:px-12 font-heading">
+      <section id="gallery" className="w-full bg-white py-14 px-6 md:px-12 font-heading">
         <div className="max-w-7xl mx-auto space-y-12">
           <div className="text-center space-y-3">
             <span className="text-xs font-bold uppercase tracking-widest text-[#EE1C25]">

@@ -221,7 +221,7 @@ export default function CourseDetailPage({ params }: { params: any }) {
       <Header />
       
       {/* ================= HERO SECTION LAYER ================= */}
-      <section className="w-full bg-gradient-to-r from-neutral-950 via-neutral-900 to-[#EE1C25]/20 text-white py-20 px-6 md:px-12 relative overflow-hidden">
+      <section className="w-full bg-gradient-to-r from-neutral-950 via-neutral-900 to-[#EE1C25]/20 text-white py-14 px-6 md:px-12 relative overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
           <div className="lg:col-span-7 space-y-6">
             <button onClick={() => window.history.back()} className="inline-flex items-center gap-2 text-xs font-bold text-neutral-400 hover:text-white transition-colors mb-4 uppercase tracking-widest">

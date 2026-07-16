@@ -4,7 +4,7 @@ import React from "react";
 
 export default function USStatement() {
   return (
-    <section className="w-full bg-neutral-950 text-white py-20 px-6 md:px-12 relative overflow-hidden z-10 font-heading">
+    <section className="w-full bg-neutral-950 text-white py-14 px-6 md:px-12 relative overflow-hidden z-10 font-heading">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#EE1C25]/10 rounded-full blur-3xl pointer-events-none" />
       

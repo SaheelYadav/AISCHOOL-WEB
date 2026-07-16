@@ -585,15 +585,15 @@ export default function AboutUsPage() {
       </div>
 
       {/* ================= 7. WHY US (Redesigned Toggle Comparison layout) ================= */}
-      <div id="whyUs" ref={sectionsRef.whyUs} className="w-full bg-white py-14 px-6 md:px-12 border-b border-gray-100">
-        <div className="max-w-xl mx-auto space-y-12">
+      <div id="whyUs" ref={sectionsRef.whyUs} className="w-full bg-white py-12 px-6 md:px-12 border-b border-gray-100">
+        <div className="max-w-4xl mx-auto space-y-10">
           
           <div className="text-center space-y-2">
             <span className="text-xs font-bold uppercase tracking-widest text-[#EE1C25]">THE TRANSFORMATION</span>
             <h2 className="text-2xl md:text-4xl font-black text-gray-950 uppercase tracking-tight">The AI School vs. Typical Bootcamp</h2>
           </div>
 
-          <RevealOnScroll className="space-y-8">
+          <RevealOnScroll className="space-y-6">
             {/* Sliding Toggle Control */}
             <div className="relative flex bg-gray-100 rounded-full p-1.5 w-[320px] md:w-[360px] mx-auto border border-gray-200">
               {/* Sliding background */}
@@ -633,7 +633,7 @@ export default function AboutUsPage() {
                 </div>
               )}
 
-              <div className="divide-y divide-gray-100 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
                   {
                     topic: "Mentors",
@@ -656,7 +656,14 @@ export default function AboutUsPage() {
                     them: "No ongoing community"
                   }
                 ].map((row, idx) => (
-                  <div key={idx} className={`flex items-start space-x-4 ${idx === 0 ? "" : "pt-6"}`}>
+                  <div 
+                    key={idx} 
+                    className={`flex items-start space-x-4 p-5 rounded-2xl border transition-all duration-300 ${
+                      displayTab === 'us' 
+                        ? 'bg-red-500/[0.01] border-red-100/70 hover:border-red-200/90 shadow-2xs' 
+                        : 'bg-neutral-50/50 border-neutral-200/60'
+                    }`}
+                  >
                     {displayTab === 'us' ? (
                       <div className="w-10 h-10 rounded-full bg-red-50 text-[#EE1C25] flex items-center justify-center shrink-0 border border-red-100">
                         <CheckCircle2 className="w-5 h-5 fill-red-500/10" />
@@ -668,7 +675,7 @@ export default function AboutUsPage() {
                     )}
                     <div>
                       <span className="block text-[9px] font-black text-gray-400 uppercase tracking-widest">{row.topic}</span>
-                      <span className="font-extrabold text-gray-900 text-sm md:text-base mt-0.5 block leading-snug">
+                      <span className="font-extrabold text-gray-900 text-sm md:text-base mt-1 block leading-snug">
                         {displayTab === 'us' ? row.us : row.them}
                       </span>
                     </div>

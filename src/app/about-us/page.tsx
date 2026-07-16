@@ -357,6 +357,34 @@ export default function AboutUsPage() {
       image: "/images/mentor_harish_v2.png",
       linkedin: "https://www.linkedin.com/in/harishkumar1111/",
     },
+    {
+      name: "Mohit Bhatia",
+      title: "Staff Program Manager",
+      initials: "MB",
+      image: "/images/mentor_mohit.png",
+      linkedin: "https://www.linkedin.com/in/mohit-bhatia-6a165324/",
+    },
+    {
+      name: "T M Praneeth Naidu",
+      title: "CTO @ Cognisys AI",
+      initials: "PN",
+      image: "/images/mentor_praneeth.png",
+      linkedin: "https://www.linkedin.com/company/theaischool/",
+    },
+    {
+      name: "Dr. Pradeep Kumar Boya",
+      title: "Co-Founder & CEO, CognisysAI",
+      initials: "PB",
+      image: "/images/mentor_pradeep.png",
+      linkedin: "https://www.linkedin.com/in/drpradeepkumarboya8888/",
+    },
+    {
+      name: "Anjaneyalu T",
+      title: "Manager, AI and Data Science",
+      initials: "AT",
+      image: "/images/mentor_anjaneyulu.png",
+      linkedin: "https://www.linkedin.com/in/anjaneyalu-t-83615661/",
+    },
   ];
 
   return (
